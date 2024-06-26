@@ -1,0 +1,245 @@
+Homepage.css
+
+/* Search bar */
+.input-search {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  /* Hero section */
+  .hero-header {
+    background-color: #f8f9fa; /* Light grey background */
+    padding: 80px 0;
+  }
+  
+  .hero-header h1 {
+    font-size: 3rem;
+    color: #343a40; /* Dark grey text color */
+  }
+  
+  .hero-header h4 {
+    font-size: 1.5rem;
+    color: #6c757d; /* Medium grey text color */
+  }
+  
+  /* Product section */
+  .product-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 20px;
+  }
+  
+  .product-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .product-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .product-image {
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+  
+  .product-details {
+    padding: 20px;
+  }
+  
+  .product-name {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .product-description {
+    color: #666;
+    margin-bottom: 10px;
+  }
+  
+  .product-price {
+    font-weight: bold;
+    color: #007bff; /* Blue color for price */
+  }
+  
+  /* Features section */
+  .features {
+    background-color: #f8f9fa; /* Light grey background */
+  }
+  
+  .features-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .features-item:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .features-icon {
+    background-color: #007bff; /* Blue color for icon background */
+    color: #fff; /* White color for icon */
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px;
+  }
+  
+  .features h5 {
+    color: #343a40; /* Dark grey text color */
+    margin-bottom: 10px;
+  }
+  
+  .features-content p {
+    color: #666; /* Medium grey text color */
+  }
+
+  .suggestion-item {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+  }
+  
+  .suggestion-image {
+    width: 50px; /* Adjust according to your preference */
+    height: 50px; /* Adjust according to your preference */
+    margin-right: 10px;
+  }
+  
+  .suggestion-item span {
+    font-size: 16px;
+  }
+  
+  /* Homepage container */
+.container-fluid {
+    padding: 0;
+  }
+  
+  /* Hero header */
+  .hero-header {
+    background-color: #f8f9fa;
+  }
+  
+  .hero-header h1 {
+    font-size: 3rem;
+  }
+  
+  /* Carousel */
+  .carousel-item {
+    position: relative;
+  }
+  
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: auto;
+    font-size: 2rem;
+  }
+  
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+  }
+  
+  /* Search container */
+  .search-container {
+    margin: 20px 0;
+  }
+  
+  /* Autosuggest input */
+  .react-autosuggest__input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+  }
+  
+  /* Suggestions container */
+  /* .react-autosuggest__suggestions-container {
+    display: none;
+  } */
+  
+  /* Suggestion item */
+  .suggestion-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .suggestion-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+  
+  /* Product cards */
+  .card {
+    margin-bottom: 20px;
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+  }
+  
+  .card-text {
+    color: #6c757d;
+  }
+  
+  /* Add to cart button */
+  .btn-primary {
+    background-color: #007bff;
+    border: none;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Features section */
+  .features-item {
+    border: 1px solid #ced4da;
+    border-radius: 10px;
+  }
+  
+  .features-icon {
+    background-color: #007bff;
+    color: #fff;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+  
+  .features-content h5 {
+    margin-bottom: 5px;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .carousel-item img {
+      height: 200px;
+    }
+  }
+  
