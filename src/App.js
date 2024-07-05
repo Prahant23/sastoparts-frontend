@@ -14,6 +14,7 @@ import AdminDashboard from "./pages/Admin/AdminDashboard";
 import Cart from "./pages/cart/cart";
 import Profile from "./pages/eidtprofile";
 import CheckoutForm from "./pages/cart/checkout";
+import Footer from "../src/components/Footer"
 
 
 
@@ -44,6 +45,7 @@ function App() {
           <Route path="/admin/edit-product/:id" element={<AdminEditProducts />} />
         </Route>
       </Routes>
+      <Footer/>
     </Router>
   );
 }

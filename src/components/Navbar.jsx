@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css"
+import logo from "../assets/images/logo.png";
 
 const Navbar = () => {
   // Get user data from local storage
@@ -32,10 +33,10 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
-        <div className="container-fluid">
-          <Link className="navbar-brand text-danger fw-blod" to="/">
-            Vintuff
+      <nav className="navbar navbar-expand-lg " style={{backgroundColor:"#1C2541"}}>
+        <div className="container-fluid mx-2">
+          <Link className="navbar-brand text-danger fw-blod" to="/" onClick={handledash}>
+          <img src={logo} alt="logo" style={{height:"50px"}} />
           </Link>
           <button
             className="navbar-toggler"
@@ -48,15 +49,11 @@ const Navbar = () => {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <button onClick={handledash}>Home</button> 
-              </li>
-            </ul>
+          <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+           
             <Link to="/cartpage" className="m-4">
-              <i className="fa fa-shopping-cart fa-lg"></i>
-              <span className="badge rounded-pill badge-notification bg-danger"></span>
+              <i className="fa fa-shopping-cart fa-lg" style={{color:"#5BC0BE"}}></i>
+              <span className="badge rounded-pill badge-notification " ></span>
             </Link>
             <form className="d-flex gap-4" role="search">
               {user ? (
@@ -93,10 +90,10 @@ const Navbar = () => {
                 </>
               ) : (
                 <>
-                  <button onClick={navigatetologin} className="btn btn-outline-danger" type="submit">
+                  <button onClick={navigatetologin} className="btn" style={{backgroundColor:"#5BC0BE",color:"white"}} type="submit">
                     Login
                   </button>
-                  <button onClick={navigatetoregister} className="btn btn-outline-success" type="submit">
+                  <button onClick={navigatetoregister} className="btn" style={{backgroundColor:"#5BC0BE",color:"white"}} type="submit">
                     Register
                   </button>
                 </>

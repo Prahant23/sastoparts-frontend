@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { forgotPasswordApi, loginApi } from "../apis/Api";
-import { Navigate, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
+import bg from "../assets/images/Rectangle 1587.png"
+import logo from "../assets/images/logo.png";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -78,20 +80,22 @@ const Login = () => {
   }, []);
 
   return (
-    <section className="vh-100">
-      <div className="container-fluid h-custom">
-        <div className="row d-flex justify-content-center align-items-center ">
-          <div className="col-md-9 col-lg-6 col-xl-5">
+    <section style={{backgroundColor:"#051923" , color:"#6FFFE9"}}>
+        <div className="d-flex justify-content-center " >
+          <div className="col-md-9 col-lg-6 col-xl-5 col-0">
             
-            <img
-              src="/assets/images/fashion.png"
-              className="img-fluid"
+            <img src={bg}
+             
               alt="Sample image"
-              style={{ maxWidth: "100%", height: "auto" }}
-            />
+              style={{width: "100%", height: "fit-content" }} />
           </div>
-          <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+          <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1 pt-5">
             <form>
+              <div class="d-flex justify-content-center flex-direction-row ">
+                <img src={logo} alt="logo"/>
+               
+              </div>
+              <h2 className="text-center">Login</h2> 
               <div class="form-outline mb-4">
                 <label class="form-label" for="form3Example3">
                   Email address
@@ -176,10 +180,10 @@ const Login = () => {
                 </div>
               </div>
 
-              <div class="text-center text-lg-start mt-4 pt-2">
+              <div class="text-center text-lg-start pt-2">
                 <button
                   type="button"
-                  class="btn btn-primary btn-lg"
+                  class="btn btn-lg " style={{width:"100%",backgroundColor:"#6FFFE9",color:"white"}}
                   onClick={handleSubmit}
                 >
                   Login
@@ -194,7 +198,6 @@ const Login = () => {
             </form>
           </div>
         </div>
-      </div>
     </section>
   );
 };
