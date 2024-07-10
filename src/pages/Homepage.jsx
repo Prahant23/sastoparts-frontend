@@ -35,7 +35,7 @@ function Homepage() {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/product/getProduct"
+          "http://localhost:4000/api/product/getProduct"
         );
         const data = await response.json();
         setProducts([data.products]);

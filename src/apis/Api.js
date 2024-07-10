@@ -32,6 +32,12 @@ export const createProductApi = (formData) =>
 
 export const getAllProductsAPI = () => Api.get("/api/product/getProduct");
 
+export const createBookingAPI = (data) =>
+  Api.post("/api/bookings", data, config);
+
+export const getBookingsAPI = () =>
+  Api.get("/api/bookings", config);
+
 
 export const getSingleProductAPI = (id) =>
   Api.get(`/api/product/get_product/${id}`);

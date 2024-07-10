@@ -1,0 +1,66 @@
+.booking-section {
+    background-color: #051923;
+    color: #6FFFE9;
+    padding: 80px 0;
+  }
+  
+  .booking-bg {
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .booking-form-wrapper {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 40px;
+    border-radius: 10px;
+  }
+  
+  .booking-logo {
+    height: 50px;
+    margin-bottom: 20px;
+  }
+  
+  .booking-title {
+    color: #6FFFE9;
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+  
+  .form-control {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #6FFFE9;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+  }
+  
+  .form-control:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    outline: none;
+  }
+  
+  .btn-booking {
+    background-color: #6FFFE9;
+    color: white;
+    width: 100%;
+    padding: 12px 0;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+  }
+  
+  .btn-booking:hover {
+    background-color: #5BC0BE;
+  }
+  
+  @media (max-width: 768px) {
+    .booking-form-wrapper {
+      padding: 20px;
+    }
+  
+    .booking-title {
+      font-size: 24px;
+    }
+  }
+  

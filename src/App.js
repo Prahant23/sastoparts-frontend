@@ -1,5 +1,5 @@
-import "./App.css";
-import { BrowserRouter as Router, Routes, Route, } from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import Register from "./pages/Register";
 import Navbar from "./components/Navbar";
@@ -14,10 +14,9 @@ import AdminDashboard from "./pages/Admin/AdminDashboard";
 import Cart from "./pages/cart/cart";
 import Profile from "./pages/eidtprofile";
 import CheckoutForm from "./pages/cart/checkout";
-import Footer from "../src/components/Footer"
-
-
-
+import Footer from "./components/footer";
+import BookingForm from "./pages/bookingform";
+import BookingList from "./components/bookingList";
 function App() {
   return (
     <Router>
@@ -26,26 +25,23 @@ function App() {
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/cartpage" element={<Cart/>} />
-        <Route path="/checkout" element={<CheckoutForm/>} />
-      
-
-        <Route path="/edit-profile/:id" element={<Profile/>} />
-        <Route path="/password/reset/:token" element={<ResetPassword/>} />
-          
-        
-        { <Route path="*" element={<h1>404</h1>} /> }
-
-        <Route element={<UserRoutes/>}>
+        <Route path="/login" element={<Login />} />
+        <Route path="/cartpage" element={<Cart />} />
+        <Route path="/checkout" element={<CheckoutForm />} />
+        <Route path="/edit-profile/:id" element={<Profile />} />
+        <Route path="/password/reset/:token" element={<ResetPassword />} />
+        <Route path="/book-garage" element={<BookingForm />} />
+        <Route path="/bookings" element={<BookingList />} />
+        <Route element={<UserRoutes />}>
           {/* <Route path="/profile" element={<>} /> */}
         </Route>
-        <Route element={<AdminRoutes/>}>
+        <Route element={<AdminRoutes />}>
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/edit-product/:id" element={<AdminEditProducts />} />
         </Route>
+        <Route path="*" element={<h1>404</h1>} />
       </Routes>
-      <Footer/>
+      <Footer />
     </Router>
   );
 }
