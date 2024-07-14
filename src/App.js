@@ -13,10 +13,13 @@ import ResetPassword from "./pages/ResetPassword";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import Cart from "./pages/cart/cart";
 import Profile from "./pages/eidtprofile";
-import CheckoutForm from "./pages/cart/checkout";
-import Footer from "./components/footer";
+import CheckoutForm from "./pages/cart/order";
+import Footer from "./components/Footer"
 import BookingForm from "./pages/bookingform";
 import BookingList from "./components/bookingList";
+import ChangePassword from "./pages/changepassword";
+
+
 function App() {
   return (
     <Router>
@@ -32,6 +35,7 @@ function App() {
         <Route path="/password/reset/:token" element={<ResetPassword />} />
         <Route path="/book-garage" element={<BookingForm />} />
         <Route path="/bookings" element={<BookingList />} />
+        <Route path="/changepassword/:id" element={<ChangePassword />} />
         <Route element={<UserRoutes />}>
           {/* <Route path="/profile" element={<>} /> */}
         </Route>

@@ -53,22 +53,22 @@ const AdminDashboard = () => {
 }
 
   // delete product function
-  const handleDelete =(id =>{
+  const handleDelete = (id => { // Error: Missing parentheses around 'id'
     // confirm dialog box
     const confirm = window.confirm("Are you sure your wnat to delete?");
-    if(!confirm) {
-      return
-    }else{
-      deleteProductAPI(id).then((res)=>{
-        if(res.data.success == false){
-          toast.error("res.data.message");
-        }else{
-          toast.success(res.data.message)
-          window.location.reload()
+    if (!confirm) {
+      return;
+    } else {
+      deleteProductAPI(id).then((res) => {
+        if (res.data.success == false) {
+          toast.error("res.data.message"); // Error: Should be `${res.data.message}`
+        } else {
+          toast.success(res.data.message);
+          window.location.reload();
         }
-      })
-    }
-  })
+      });
+    }   
+  });
   return (
     <>
       <div className="m-4">

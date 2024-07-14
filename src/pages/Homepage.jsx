@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { getAllProductsAPI } from "../apis/Api";
 import axios from "axios";
 import { toast } from "react-toastify";
-import "./Homepage.css";
-import Autosuggest from "react-autosuggest";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import "./Homepage.css"; // Ensure this is your custom CSS file
+import bike from "../assets/images/Container.png";
 
 function Homepage() {
-  const [cart, setCart] = useState([]);
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const addToCart = async (product) => {
     try {
@@ -38,7 +39,7 @@ function Homepage() {
           "http://localhost:4000/api/product/getProduct"
         );
         const data = await response.json();
-        setProducts([data.products]);
+        setProducts(data.products);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -47,285 +48,237 @@ function Homepage() {
     fetchProducts();
   }, []);
 
-  useEffect(() => {
-    getAllProductsAPI().then((res) => {
-      setProducts(res.data.products);
-    });
-  }, []);
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
   const filteredProducts = products.filter((product) =>
-  product.productName
-    ?.toLowerCase()
-    .includes((searchTerm || "").toLowerCase())
-);
+    product.productName?.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-  const getSuggestions = (value) => {
-    const inputValue = value.trim().toLowerCase();
-    const inputLength = inputValue.length;
-
-    return inputLength === 0
-      ? []
-      : products.filter((product) =>
-          product.productName.toLowerCase().includes(inputValue)
-        );
+  const handleModalOpen = (product) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
   };
 
-  const onSuggestionsFetchRequested = ({ value }) => {
-    setSuggestions(getSuggestions(value));
-  };
-
-  const onSuggestionsClearRequested = () => {
-    setSuggestions([]);
-  };
-
-  const getSuggestionValue = (suggestion) => suggestion.productName;
-
-  const renderSuggestion = (suggestion) => <div>{suggestion.productName}</div>;
-
-  const onSuggestionSelected = (event, { suggestion }) => {
-    // Redirect or display the selected product
-    console.log("Selected product:", suggestion);
-  };
-
-  const inputProps = {
-    placeholder: "Search products...",
-    value: searchTerm,
-    onChange: handleSearchChange,
+  const handleModalClose = () => {
+    setIsModalOpen(false);
   };
 
   return (
-    <>
-        <div className="container-fluid py-5 mb-5 hero-header">
-          <div className="container py-5">
-            <div className="row g-5 align-items-center">
-              <div className="col-md-12 col-lg-7">
-                <h4 className="mb-3 text-secondary">100% Authentic</h4>
-                <h1 className="mb-5 display-3 text-primary">
-                  vintage clothes and accessories
-                </h1>
-              </div>
-              <div className="col-md-12 col-lg-5">
-                <div
-                  id="carouselId"
-                  className="carousel slide position-relative"
-                  data-bs-ride="carousel"
-                >
-                  <div className="carousel-inner" role="listbox">
-                    <div className="carousel-item active rounded">
-                      <img
-                        src="https://images.pexels.com/photos/996329/pexels-photo-996329.jpeg?auto=compress&cs=tinysrgb&w=600"
-                        className="img-fluid w-100 h-100 bg-secondary rounded"
-                        alt="First slide"
-                      />
-                      <a href="#" className="btn px-4 py-2 text-white rounded">
-                        Fruits
-                      </a>
-                    </div>
-                    <div className="carousel-item rounded">
-                      <img
-                        src="https://images.pexels.com/photos/2294342/pexels-photo-2294342.jpeg?auto=compress&cs=tinysrgb&w=600"
-                        className="img-fluid w-100 h-80 rounded"
-                        alt="Second slide"
-                      />
-                      <a href="#" className="btn px-4 py-2 text-white rounded">
-                        Clothes
-                      </a>
-                    </div>
-                    {/* Add more carousel items with local image paths */}
-                  </div>
-                  <button
-                    className="carousel-control-prev"
-                    type="button"
-                    data-bs-target="#carouselId"
-                    data-bs-slide="prev"
-                  >
-                    <span
-                      className="carousel-control-prev-icon"
-                      aria-hidden="true"
-                    ></span>
-                    <span className="visually-hidden">Previous</span>
-                  </button>
-                  <button
-                    className="carousel-control-next"
-                    type="button"
-                    data-bs-target="#carouselId"
-                    data-bs-slide="next"
-                  >
-                    <span
-                      className="carousel-control-next-icon"
-                      aria-hidden="true"
-                    ></span>
-                    <span className="visually-hidden">Next</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div>
-        <div className="search-container">
-        <Autosuggest
-  suggestions={filteredProducts}
-  onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-  onSuggestionsClearRequested={onSuggestionsClearRequested}
-  getSuggestionValue={(suggestion) => suggestion.productName} // Update to return product name
-  renderSuggestion={renderSuggestion}
-  inputProps={{
-    placeholder: 'Search products...',
-    value: searchTerm || '',
-    onChange: (event, { newValue }) => setSearchTerm(newValue)
-  }}
-  onSuggestionSelected={(event, { suggestion }) => setSearchTerm(suggestion.productName)} // Update search term when suggestion is selected
-/>
+    <div className="homepage-container">
+      <div className="d-flex justify-content-center">
+        <img src={bike} alt="Bike" style={{ width: "80%" }} />
+      </div>
 
-        </div>
-        <div className="container-fluid fruite py-5">
-          <div className="container py-5">
-            <div className="tab-className text-center">
-              <div className="row g-4">
-                <div className="col-lg-4 text-start">
-                  <h1>Our Authentic Products</h1>
+      <div className="">
+        <div className=" py-5">
+          <div className="text-center ">
+            <div className="d-flex justify-content-evenly">
+              <div className="mx-5 d-flex gap-2">
+                <div className="p-2 h-fill">                <i className="fas fa-shipping-fast fa-2x mb-3"></i>
                 </div>
-                <div className="col-lg-8 text-end">
-                  <ul className="nav nav-pills d-inline-flex text-center mb-5">
-                    <li className="nav-item">
-                      <a
-                        className="d-flex m-2 py-2 bg-light rounded-pill active"
-                        data-bs-toggle="pill"
-                        href="#tab-1"
-                      >
-                        <span className="text-dark" style={{ width: "130px" }}>
-                          All Products
-                        </span>
-                      </a>
-                    </li>
-                    <li className="nav-item">
-                      <a
-                        className="d-flex py-2 m-2 bg-light rounded-pill"
-                        data-bs-toggle="pill"
-                        href="#tab-2"
-                      >
-                        <span className="text-dark" style={{ width: "130px" }}>
-                          Clothes
-                        </span>
-                      </a>
-                    </li>
-                    <li className="nav-item">
-                      <a
-                        className="d-flex m-2 py-2 bg-light rounded-pill"
-                        data-bs-toggle="pill"
-                        href="#tab-3"
-                      >
-                        <span className="text-dark" style={{ width: "130px" }}>
-                          Shoes
-                        </span>
-                      </a>
-                    </li>
-                    <li className="nav-item">
-                      <a
-                        className="d-flex m-2 py-2 bg-light rounded-pill"
-                        data-bs-toggle="pill"
-                        href="#tab-4"
-                      >
-                        <span className="text-dark" style={{ width: "130px" }}>
-                          Accessories
-                        </span>
-                      </a>
-                    </li>
-                    <li className="nav-item">
-                      <a
-                        className="d-flex m-2 py-2 bg-light rounded-pill"
-                        data-bs-toggle="pill"
-                        href="#tab-5"
-                      ></a>
-                    </li>
-                  </ul>
+                <div>
+                  <div className="text-start">
+                  <h4 style={{color:"#6FFFE9"}}>Free Home Delivery</h4>
+                  <p>Provide free home delivery for all<br/>
+                  product over Rs10000</p>
+
+                  </div>
+
                 </div>
+              </div>
+              <div className="mx-5 d-flex gap-2">
+              <div className="p-2 h-fill">  
+                <i className="fas fa-check-circle fa-2x mb-3"></i></div>
+                <div className="text-start">
+                  <h4 style={{color:"#6FFFE9"}}>Quality Products</h4>
+                  <p>We ensure our product quality <br/>all
+                  times</p>
+
+                  </div>
+              </div>
+              <div className="mx-5 d-flex gap-2">
+                <div className="p-2 h-fill">
+                <i className="fas fa-phone fa-2x mb-3"></i>
+
+                </div>
+                <div className="text-start">
+                  <h4 style={{color:"#6FFFE9"}}>Booking</h4>
+                  <p>To satisfy our customer we try to<br/> give
+                  support online</p>
+
+                  </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="container">
+      </div>
+
+      <div className="searchbar">
+        <input
+          className="search_input"
+          type="text"
+          value={searchTerm}
+          onChange={handleSearchChange}
+          placeholder="Search products..."
+        />
+        <a href="#" className="search_icon">
+          <i className="fas fa-search"></i>
+        </a>
+      </div>
+
+      <div className=" product-section">
+        <div className="text-center">
+          <h2 className="mb-3">Best selling product</h2>
+        </div>
+        <div className="col-12">
           <div className="row">
-            {products.map((product, index) => (
-              <div key={index} className="col-lg-3 col-md-4 col-sm-6 mb-4">
-                <div className="card">
-                  <img
-                    src={product.productImage}
-                    className="card-img-top"
-                    alt={product.productName}
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">{product.productName}</h5>
-                    <p className="card-text">{product.productDescription}</p>
-                    <p className="card-text">Price: ${product.productPrice}</p>
-                    <button
-                      className="btn btn-primary"
-                      onClick={() => addToCart(product)}
-                    >
-                      Add to Cart
-                    </button>
+            {filteredProducts.map((product, index) => (
+              <div
+                key={index}
+                className="col-lg-3 col-md-6 col-sm-12 col-6 gap-2"
+              >
+                <div className="product-card mx-2">
+                  <div className="product-image">
+                    <img
+                      src={product.productImage}
+                      alt={product.productName}
+                      className="h-fit"
+                      style={{ height: "250px", width: "220px" }}
+                    />
+                  </div>
+                  <div className="product-info">
+                    <h5>{product.productName}</h5>
+                    <p>${product.productPrice}</p>
+                    <div className="product-actions">
+                      <button
+                        className="btn btn-primary"
+                        onClick={() => addToCart(product)}
+                      >
+                        Add to Cart
+                      </button>
+                      <button
+                        className="btn btn-secondary"
+                        onClick={() => handleModalOpen(product)}
+                      >
+                        Quick View
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
             ))}
           </div>
         </div>
-        <div className="container-fluid features py-5">
-          <div className="container py-5">
-            <div className="row g-4">
-              <div className="col-md-6 col-lg-3">
-                <div className="features-item text-center rounded bg-light p-4">
-                  <div className="features-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
-                    <i className="fas fa-car-side fa-3x text-white"></i>
+      </div>
+
+      <div className=" product-section">
+        <div className="text-center">
+          <h2 className="mb-3">All of Our Products</h2>
+        </div>
+        <div className="col-12">
+          <div className="row">
+            {filteredProducts.map((product, index) => (
+              <div
+                key={index}
+                className="col-lg-3 col-md-6 col-sm-12 col-6 gap-2"
+              >
+                <div className="product-card mx-2">
+                  <div className="product-image">
+                    <img
+                      src={product.productImage}
+                      alt={product.productName}
+                      className="h-fit"
+                      style={{ height: "250px", width: "220px" }}
+                    />
                   </div>
-                  <div className="features-content text-center">
-                    <h5>Never regret buying</h5>
-                    <p className="mb-0">Free on order over 3000</p>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6 col-lg-3">
-                <div className="features-item text-center rounded bg-light p-4">
-                  <div className="features-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
-                    <i className="fas fa-user-shield fa-3x text-white"></i>
-                  </div>
-                  <div className="features-content text-center">
-                    <h5>Security Payment</h5>
-                    <p className="mb-0">100% security payment</p>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6 col-lg-3">
-                <div className="features-item text-center rounded bg-light p-4">
-                  <div className="features-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
-                    <i className="fas fa-exchange-alt fa-3x text-white"></i>
-                  </div>
-                  <div className="features-content text-center">
-                    <h5>30 Day Return</h5>
-                    <p className="mb-0">30 day money guarantee</p>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6 col-lg-3">
-                <div className="features-item text-center rounded bg-light p-4">
-                  <div className="features-icon btn-square rounded-circle bg-secondary mb-5 mx-auto">
-                    <i className="fa fa-phone-alt fa-3x text-white"></i>
-                  </div>
-                  <div className="features-content text-center">
-                    <h5>24/7 Support</h5>
-                    <p className="mb-0">Support every time fast</p>
+                  <div className="product-info">
+                    <h5>{product.productName}</h5>
+                    <p>${product.productPrice}</p>
+                    <div className="product-actions">
+                      <button
+                        className="btn btn-primary"
+                        onClick={() => addToCart(product)}
+                      >
+                        Add to Cart
+                      </button>
+                      <button
+                        className="btn btn-secondary"
+                        onClick={() => handleModalOpen(product)}
+                      >
+                        Quick View
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>
-    </>
+
+      {/* Quick View Modal */}
+      <div
+        className={`modal fade ${isModalOpen ? "show" : ""}`}
+        style={{ display: isModalOpen ? "block" : "none" }}
+        tabIndex="-1"
+        aria-labelledby="quickViewModalLabel"
+        aria-hidden={!isModalOpen}
+      >
+        {selectedProduct && (
+          <div className="modal-dialog modal-lg modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="quickViewModalLabel">
+                  {selectedProduct.productName}
+                </h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={handleModalClose}
+                ></button>
+              </div>
+              <div className="modal-body">
+                <div className="row">
+                  <div className="col-md-6">
+                    <img
+                      src={selectedProduct.productImage}
+                      alt={selectedProduct.productName}
+                      className="img-fluid"
+                    />
+                  </div>
+                  <div className="col-md-6">
+                    <h4 className="mt-3">{selectedProduct.productName}</h4>
+                    <p>{selectedProduct.productDescription}</p>
+                    <p className="h5">Price: ${selectedProduct.productPrice}</p>
+                  </div>
+                </div>
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={handleModalClose}
+                >
+                  Close
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => {
+                    addToCart(selectedProduct);
+                    handleModalClose();
+                  }}
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
 

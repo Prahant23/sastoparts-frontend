@@ -1,78 +1,76 @@
 /* Navbar container */
 .navbar {
-    background-color: #1C2541; /* Change the background color as needed */
-    border-bottom: 1px solid #dee2e6; /* Add a bottom border */
-  }
-  
-  .navbar-brand {
-    font-size: 1.5rem; /* Adjust the font size */
-    font-weight: bold; /* Make the brand text bold */
-    color: #dc3545; /* Change the text color */
-    
-  }
-  
-  /* Navbar toggler icon */
-  .navbar-toggler {
-    border: none; /* Remove border */
-  }
-  
-  /* Navbar links */
-  .navbar-nav .nav-link {
-    color: #000000; /* Change the link color */ 
-    font-weight: bold; /* Make the links bold */
-    margin-right: 20px; /* Add some margin between links */
-  }
-  
-  /* Dropdown */
-  .dropdown-menu {
-    background-color: #ffffff; /* Change the background color */
-  }
-  
-  .dropdown-item {
-    color: #000000; /* Change the text color */
-  }
-  
-  .dropdown-item:hover {
-    background-color: #f8f9fa; /* Change the background color on hover */
-  }
-  
-  /* Cart icon */
-  .fa-shopping-cart {
-    color: #dc3545; /* Change the icon color */
-  }
-  
-  /* Badge notification */
-  .badge-notification {
-    background-color: #dc3545; /* Change the background color */
-  }
-  
-  /* Buttons */
-  .btn-outline-danger,
-  .btn-outline-success {
-    border-color: #dc3545; /* Change the border color */
-    color: #dc3545; /* Change the text color */
-  }
-  
-  .btn-outline-danger:hover,
-  .btn-outline-success:hover {
-    background-color: #dc3545; /* Change the background color on hover */
-    color: #ffffff; /* Change the text color on hover */
-  }
-  
-  /* Form */
-  .form-control {
-    border-color: #ced4da; /* Change the border color */
-  }
-  
-  /* Search button */
-  .btn-search {
-    background-color: #dc3545; /* Change the background color */
-    border-color: #dc3545; /* Change the border color */
-    color: #ffffff; /* Change the text color */
-  }
-  
-  .btn-search:hover {
-    background-color: #c82333; /* Change the background color on hover */
-    border-color: #c82333; /* Change the border color on hover */
-  }
-  
+  background-color: #1C2541; /* Change the background color as needed */
+  border-bottom: 1px solid #dee2e6; /* Add a bottom border */
+}
+
+.navbar-brand {
+  font-size: 1.5rem; /* Adjust the font size */
+  font-weight: bold; /* Make the brand text bold */
+  color: #dc3545; /* Change the text color */
+}
+
+/* Navbar toggler icon */
+.navbar-toggler {
+  border: none; /* Remove border */
+}
+
+/* Navbar links */
+.navbar-nav .nav-link {
+  color: #000000; /* Change the link color */ 
+  font-weight: bold; /* Make the links bold */
+  margin-right: 20px; /* Add some margin between links */
+}
+
+/* Dropdown */
+.dropdown-menu {
+  background-color: #ffffff; /* Change the background color */
+}
+
+.dropdown-item {
+  color: #000000; /* Change the text color */
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa; /* Change the background color on hover */
+}
+
+/* Cart icon */
+.fa-shopping-cart {
+  color: #dc3545; /* Change the icon color */
+}
+
+/* Badge notification */
+.badge-notification {
+  background-color: #dc3545; /* Change the background color */
+}
+
+/* Buttons */
+.btn-outline-danger,
+.btn-outline-success {
+  border-color: #dc3545; /* Change the border color */
+  color: #dc3545; /* Change the text color */
+}
+
+.btn-outline-danger:hover,
+.btn-outline-success:hover {
+  background-color: #dc3545; /* Change the background color on hover */
+  color: #ffffff; /* Change the text color on hover */
+}
+
+/* Form */
+.form-control {
+  border-color: #ced4da; /* Change the border color */
+}
+
+/* Search button */
+.btn-search {
+  background-color: #dc3545; /* Change the background color */
+  border-color: #dc3545; /* Change the border color */
+  color: #ffffff; /* Change the text color */
+}
+
+.btn-search:hover {
+  background-color: #c82333; /* Change the background color on hover */
+  border-color: #c82333; /* Change the border color on hover */
+}

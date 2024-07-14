@@ -19,7 +19,6 @@ const AdminEditProducts = () => {
         })
     },[id])
 
-
     // Make useState
     const [productName, setProductName] = useState('')
     const [productPrice, setProductPrice] = useState('')

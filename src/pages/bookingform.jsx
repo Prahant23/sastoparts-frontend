@@ -1,4 +1,3 @@
-// components/BookingForm.js
 import React, { useState } from "react";
 import { createBookingAPI } from "../apis/Api";
 
@@ -20,8 +19,9 @@ const BookingForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      await createBookingAPI(formData);
+      await createBookingAPI(formData); // Assuming API expects formData directly
       alert("Booking created successfully");
       setFormData({
         fullName: "",
@@ -37,58 +37,61 @@ const BookingForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Full Name:</label>
-        <input
-          type="text"
-          name="fullName"
-          value={formData.fullName}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label>Car Number:</label>
-        <input
-          type="text"
-          name="carNumber"
-          value={formData.carNumber}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label>Problem Description:</label>
-        <textarea
-          name="problemDescription"
-          value={formData.problemDescription}
-          onChange={handleChange}
-          required
-        ></textarea>
-      </div>
-      <div>
-        <label>Date:</label>
-        <input
-          type="date"
-          name="date"
-          value={formData.date}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label>Contact Number:</label>
-        <input
-          type="text"
-          name="contactNumber"
-          value={formData.contactNumber}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <button type="submit">Book Garage</button>
-    </form>
+    <div>
+      <form onSubmit={handleSubmit}>
+        {/* Form fields */}
+        <div>
+          <label>Full Name:</label>
+          <input
+            type="text"
+            name="fullName"
+            value={formData.fullName}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label>Car Number:</label>
+          <input
+            type="text"
+            name="carNumber"
+            value={formData.carNumber}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label>Problem Description:</label>
+          <textarea
+            name="problemDescription"
+            value={formData.problemDescription}
+            onChange={handleChange}
+            required
+          ></textarea>
+        </div>
+        <div>
+          <label>Date:</label>
+          <input
+            type="date"
+            name="date"
+            value={formData.date}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label>Contact Number:</label>
+          <input
+            type="text"
+            name="contactNumber"
+            value={formData.contactNumber}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <button type="submit">Book Garage</button>
+      </form>
+    </div>
   );
 };
 
