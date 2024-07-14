@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
-import {  getLoggedInUserDetail, updateLoggedInUserDetail } from "../apis/Api";
+import { getLoggedInUserDetail, updateLoggedInUserDetail } from "../apis/Api";
 import { toast } from "react-toastify";
-import  "./editprofile.css";
+import "./editprofile.css";
 import { useParams } from "react-router-dom";
 const Profile = () => {
   const { id } = useParams(); // Access id parameter from URL
@@ -9,18 +9,18 @@ const Profile = () => {
   const fileInputRef = useRef(null);
 
   const handleImageClick = () => {
-     fileInputRef.current.click();
+    fileInputRef.current.click();
   };
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    console.log(file)
+    console.log(file);
     setUser((user) => ({ ...user, avatar: file }));
   };
 
   const initialUserState = {
-    firstName: "",//firstname
-  lastName: "", //lastname
+    firstName: "", //firstname
+    lastName: "", //lastname
     email: "", //email
   };
 
@@ -50,14 +50,14 @@ const Profile = () => {
       fd.append("firstName", user.firstName);
       fd.append("lastName", user.lastName);
       fd.append("email", user.email);
-      fd.append("avatar", user.avatar)
+      fd.append("avatar", user.avatar);
 
       const res = await updateLoggedInUserDetail(id, fd);
       toast.success(res.data.message);
     } catch (error) {
       const response = await error.response.data;
-      console.log(response)
-      toast.error(response.message)
+      console.log(response);
+      toast.error(response.message);
       console.log("error: ", error);
     }
   };
@@ -65,58 +65,76 @@ const Profile = () => {
     "https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI=";
 
   return (
-    <div className="profile-container">
-          <div className="profile-image" onClick={handleImageClick}>
-          <img
-            src={user.avatar || placeholderAvatar}
-            alt="User Profile"
-            onError={(e) => console.error("Image loading error", e)}
-          />
-          <input
-            type="file"
-            accept="image/*"
-            ref={fileInputRef}
-            style={{ display: "none" }}
-            onChange={(e) => handleFileChange(e)}
-          />
-        </div>
-      <div className="profile-section">
-  
-        <div className="profile-info">
+    <div
+      className="profile-container"
+      style={{ backgroundColor: "#051923", color: "#6FFFE9" }}
+    >
+      <div className="mt-3 p-3" style={{backgroundColor:"#1C2541" , color:"#6FFFE9"}}>
+        <div className="">
           <h2>Your New Profile</h2>
           <hr />
-          <div className="input-group">
-            <label>First Name</label>
+          <div className="profile-image" onClick={handleImageClick}>
+            <img
+              src={user.avatar || placeholderAvatar}
+              alt="User Profile"
+              onError={(e) => console.error("Image loading error", e)}
+            />
             <input
-              onChange={(event) => setUser((user) => ({ ...user, firstName: event.target.value }))}
-              value={user.firstName}
-              placeholder="Your New First Name"
-              type="text"
+              type="file"
+              accept="image/*"
+              ref={fileInputRef}
+              style={{ display: "none" }}
+              onChange={(e) => handleFileChange(e)}
             />
           </div>
-          <div className="input-group">
-            <label>Last Name</label>
-            <input
-              onChange={(event) => setUser((user) => ({ ...user, lastName: event.target.value }))}
-              value={user.lastName}
-              placeholder="Your New Last Name"
-              type="text"
-            />
+          <div className="col-12">
+            <div className="row">
+              <div className="input-group col-lg-6 col-md-6">
+                <label style={{ color:"#6FFFE9"}}>First Name</label>
+                <input
+                  onChange={(event) =>
+                    setUser((user) => ({
+                      ...user,
+                      firstName: event.target.value,
+                    }))
+                  }
+                  value={user.firstName}
+                  placeholder="Your New First Name"
+                  type="text"
+                />
+              </div>
+              <div className="input-group col-lg-6 col-md-6">
+                <label style={{ color:"#6FFFE9"}}>Last Name</label>
+                <input
+                  onChange={(event) =>
+                    setUser((user) => ({
+                      ...user,
+                      lastName: event.target.value,
+                    }))
+                  }
+                  value={user.lastName}
+                  placeholder="Your New Last Name"
+                  type="text"
+                />
+              </div>
+              <div className="input-group col-lg-6 col-md-6">
+                <label style={{ color:"#6FFFE9"}} >Email</label>
+                <input
+                  onChange={(event) =>
+                    setUser((user) => ({ ...user, email: event.target.value }))
+                  }
+                  value={user.email}
+                  placeholder="Your New Email"
+                  type="text"
+                  
+                />
+              </div>
+            </div>
+            <button onClick={handleUserUpdate} className="save-btn">
+              Save Changes
+            </button>
           </div>
-          <div className="input-group">
-            <label>Email</label>
-            <input
-              onChange={(event) => setUser((user) => ({ ...user, email: event.target.value }))}
-              value={user.email}
-              placeholder="Your New Email"
-              type="text"
-            />
-          </div>
-          <button onClick={handleUserUpdate} className="save-btn">
-            Save Changes
-          </button>
         </div>
-      
       </div>
     </div>
   );

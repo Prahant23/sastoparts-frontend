@@ -77,11 +77,12 @@ const Cart = () => {
   };
 
   return (
-    <div className="container-fluid bg-light py-5">
-      <div className="container">
-        <div className="row">
+    <div className=" py-5" style={{backgroundColor:"#051923" , color:"#6FFFE9"}}>
+      <div className="">
+        <div className="row mx-2">
+        <h2 className="mb-4">Your Shopping Cart</h2>
+
           <div className="col-md-8">
-            <h2 className="mb-4">Your Shopping Cart</h2>
             {cartItems.map((cart, index) => (
               <div key={index} className="card mb-3">
                 <div className="row g-0">

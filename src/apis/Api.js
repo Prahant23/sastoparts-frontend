@@ -55,6 +55,7 @@ export const deleteBookingAPI = (id) => {
   });
 };
 
+
 export const updateProductAPI = (id, formData) => Api.put(`/api/product/update_product/${id}`, formData, config);
 
 export const deleteProductAPI = (id) => Api.delete(`/api/product/deleteproduct/${id}`, config);
@@ -84,6 +85,7 @@ export const updateLoggedInUserDetail = (id, userData) => {
   });
 };
 
+
 export const checkoutOrder = async (data) => {
   try {
     const response = await Api.post('/api/order/checkout', data);
@@ -100,5 +102,7 @@ export const changePasswordApi = (userId, passwords) =>
 export const createOrderAPI = (orderData) => Api.post("/api/orders", orderData, config);
 
 export const getOrderAPI = (orderId) => Api.get(`/api/orders/${orderId}`, config);
+
+
 
 export default Api;

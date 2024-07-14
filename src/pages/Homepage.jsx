@@ -5,6 +5,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./Homepage.css"; // Ensure this is your custom CSS file
 import bike from "../assets/images/Container.png";
+import Typography from '@mui/material/Typography';
+import Rating from '@mui/material/Rating';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart, faEye } from '@fortawesome/free-solid-svg-icons';
 
 function Homepage() {
   const [products, setProducts] = useState([]);
@@ -76,39 +80,36 @@ function Homepage() {
           <div className="text-center ">
             <div className="d-flex justify-content-evenly">
               <div className="mx-5 d-flex gap-2">
-                <div className="p-2 h-fill">                <i className="fas fa-shipping-fast fa-2x mb-3"></i>
+                <div className="p-2 h-fill">
+                  <i className="fas fa-shipping-fast fa-2x mb-3"></i>
                 </div>
                 <div>
                   <div className="text-start">
-                  <h4 style={{color:"#6FFFE9"}}>Free Home Delivery</h4>
-                  <p>Provide free home delivery for all<br/>
-                  product over Rs10000</p>
-
+                    <h4 style={{color:"#6FFFE9"}}>Free Home Delivery</h4>
+                    <p>Provide free home delivery for all<br/>
+                    product over Rs10000</p>
                   </div>
-
                 </div>
               </div>
               <div className="mx-5 d-flex gap-2">
-              <div className="p-2 h-fill">  
-                <i className="fas fa-check-circle fa-2x mb-3"></i></div>
+                <div className="p-2 h-fill">  
+                  <i className="fas fa-check-circle fa-2x mb-3"></i>
+                </div>
                 <div className="text-start">
                   <h4 style={{color:"#6FFFE9"}}>Quality Products</h4>
                   <p>We ensure our product quality <br/>all
                   times</p>
-
-                  </div>
+                </div>
               </div>
               <div className="mx-5 d-flex gap-2">
                 <div className="p-2 h-fill">
-                <i className="fas fa-phone fa-2x mb-3"></i>
-
+                  <i className="fas fa-phone fa-2x mb-3"></i>
                 </div>
                 <div className="text-start">
                   <h4 style={{color:"#6FFFE9"}}>Booking</h4>
                   <p>To satisfy our customer we try to<br/> give
                   support online</p>
-
-                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -130,39 +131,49 @@ function Homepage() {
 
       <div className=" product-section">
         <div className="text-center">
-          <h2 className="mb-3">Best selling product</h2>
+          <h2 className="mb-3" style={{color:"#6FFFE9"}}>Best selling product</h2>
+          <p style={{color :" #C4C4C4"}}>All best seller product are now available for you and your can buy this product <br />
+          from here any time any where so shop now</p>
         </div>
         <div className="col-12">
           <div className="row">
             {filteredProducts.map((product, index) => (
-              <div
-                key={index}
-                className="col-lg-3 col-md-6 col-sm-12 col-6 gap-2"
-              >
+              <div key={index} className="col-lg-3 col-md-6 col-sm-12 col-6 gap-2">
                 <div className="product-card mx-2">
                   <div className="product-image">
                     <img
                       src={product.productImage}
                       alt={product.productName}
                       className="h-fit"
-                      style={{ height: "250px", width: "220px" }}
+                      style={{ height: '250px', width: '220px' }}
                     />
                   </div>
                   <div className="product-info">
                     <h5>{product.productName}</h5>
                     <p>${product.productPrice}</p>
+                    {/* Add Rating component with Bootstrap classes */}
+                    <Rating
+                      start={0}
+                      stop={5}
+                      step={1}
+                      fractions={2}
+                      initialRating={product.rating} // Replace with actual rating value from your data
+                      readonly={true} // Make it read-only if displaying average rating
+                      emptySymbol={<i className="far fa-star text-muted"></i>} // Bootstrap text-muted class for empty stars
+                      fullSymbol={<i className="fas fa-star text-warning"></i>} // Bootstrap text-warning class for filled stars
+                    />
                     <div className="product-actions">
                       <button
-                        className="btn btn-primary"
+                        className="btn btn-primary add-to-cart-icon"
                         onClick={() => addToCart(product)}
                       >
-                        Add to Cart
+                        <FontAwesomeIcon icon={faShoppingCart} />
                       </button>
                       <button
-                        className="btn btn-secondary"
+                        className="btn btn-secondary quick-view-icon"
                         onClick={() => handleModalOpen(product)}
                       >
-                        Quick View
+                        <FontAwesomeIcon icon={faEye} />
                       </button>
                     </div>
                   </div>
@@ -175,39 +186,47 @@ function Homepage() {
 
       <div className=" product-section">
         <div className="text-center">
-          <h2 className="mb-3">All of Our Products</h2>
+          <h2 className="mb-3" style={{color:"#6FFFE9"}}>All of Our Products</h2>
         </div>
         <div className="col-12">
           <div className="row">
             {filteredProducts.map((product, index) => (
-              <div
-                key={index}
-                className="col-lg-3 col-md-6 col-sm-12 col-6 gap-2"
-              >
+              <div key={index} className="col-lg-3 col-md-6 col-sm-12 col-6 gap-2">
                 <div className="product-card mx-2">
                   <div className="product-image">
                     <img
                       src={product.productImage}
                       alt={product.productName}
                       className="h-fit"
-                      style={{ height: "250px", width: "220px" }}
+                      style={{ height: '250px', width: '220px' }}
                     />
                   </div>
                   <div className="product-info">
                     <h5>{product.productName}</h5>
                     <p>${product.productPrice}</p>
+                    {/* Add Rating component with Bootstrap classes */}
+                    <Rating
+                      start={0}
+                      stop={5}
+                      step={1}
+                      fractions={2}
+                      initialRating={product.rating} // Replace with actual rating value from your data
+                      readonly={true} // Make it read-only if displaying average rating
+                      emptySymbol={<i className="far fa-star text-muted"></i>} // Bootstrap text-muted class for empty stars
+                      fullSymbol={<i className="fas fa-star text-warning"></i>} // Bootstrap text-warning class for filled stars
+                    />
                     <div className="product-actions">
                       <button
-                        className="btn btn-primary"
+                        className="btn btn-primary add-to-cart-icon"
                         onClick={() => addToCart(product)}
                       >
-                        Add to Cart
+                        <FontAwesomeIcon icon={faShoppingCart} />
                       </button>
                       <button
-                        className="btn btn-secondary"
+                        className="btn btn-secondary quick-view-icon"
                         onClick={() => handleModalOpen(product)}
                       >
-                        Quick View
+                        <FontAwesomeIcon icon={faEye} />
                       </button>
                     </div>
                   </div>

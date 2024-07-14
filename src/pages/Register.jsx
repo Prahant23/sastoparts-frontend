@@ -1,22 +1,29 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { registerApi } from "../apis/Api";
+import bg from "../assets/images/Rectangle 1587.png";
+import logo from "../assets/images/logo.png";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleFirstName = (e) => {
     setFirstName(e.target.value);
   };
+
   const handleLastName = (e) => {
     setLastName(e.target.value);
   };
+
   const handleEmail = (e) => {
     setEmail(e.target.value);
   };
+
   const handlePassword = (e) => {
     setPassword(e.target.value);
   };
@@ -35,6 +42,7 @@ const Register = () => {
       .then((res) => {
         if (res.data.success === true) {
           toast.success(res.data.message);
+          navigate("/login"); // Redirect to login page after successful registration
         } else {
           toast.error(res.data.message);
         }
@@ -46,59 +54,92 @@ const Register = () => {
   };
 
   return (
-    <div className="container">
-      <div className="row justify-content-center mt-5">
-        <div className="col-md-6">
-          <div className="card p-4 shadow">
-            <h1 className="mb-4 text-center text-danger">Create an Account</h1>
-            <form onSubmit={handleSubmit}>
-              <div className="mb-3">
-                <input
-                  onChange={handleFirstName}
-                  type="text"
-                  className="form-control"
-                  placeholder="First Name"
-                />
-              </div>
-              <div className="mb-3">
-                <input
-                  onChange={handleLastName}
-                  type="text"
-                  className="form-control"
-                  placeholder="Last Name"
-                />
-              </div>
-              <div className="mb-3">
-                <input
-                  onChange={handleEmail}
-                  type="email"
-                  className="form-control"
-                  placeholder="Email"
-                />
-              </div>
-              <div className="mb-3">
-                <input
-                  onChange={handlePassword}
-                  type="password"
-                  className="form-control"
-                  placeholder="Password"
-                />
-              </div>
+    <section style={{ backgroundColor: "#051923", color: "#6FFFE9" }}>
+      <div className="d-flex justify-content-center">
+        <div className="col-md-9 col-lg-6 col-xl-5 col-0">
+          <img
+            src={bg}
+            alt="Sample image"
+            style={{ width: "100%", height: "fit-content" }}
+          />
+        </div>
+        <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1 pt-5">
+          <form onSubmit={handleSubmit}>
+            <div className="d-flex justify-content-center flex-direction-row">
+              <img src={logo} alt="logo" />
+            </div>
+            <h2 className="text-center">Register</h2>
+            <div className="form-outline mb-4">
+              <label className="form-label" htmlFor="firstName">
+                First Name
+              </label>
+              <input
+                onChange={handleFirstName}
+                type="text"
+                id="firstName"
+                className="form-control form-control-lg"
+                placeholder="Enter your first name"
+              />
+            </div>
+            <div className="form-outline mb-4">
+              <label className="form-label" htmlFor="lastName">
+                Last Name
+              </label>
+              <input
+                onChange={handleLastName}
+                type="text"
+                id="lastName"
+                className="form-control form-control-lg"
+                placeholder="Enter your last name"
+              />
+            </div>
+            <div className="form-outline mb-4">
+              <label className="form-label" htmlFor="email">
+                Email address
+              </label>
+              <input
+                onChange={handleEmail}
+                type="email"
+                id="email"
+                className="form-control form-control-lg"
+                placeholder="Enter a valid email address"
+              />
+            </div>
+            <div className="form-outline mb-3">
+              <label className="form-label" htmlFor="password">
+                Password
+              </label>
+              <input
+                onChange={handlePassword}
+                type="password"
+                id="password"
+                className="form-control form-control-lg"
+                placeholder="Enter password"
+              />
+            </div>
+            <div className="text-center text-lg-start pt-2">
               <button
                 type="submit"
-                className="btn btn-danger btn-block"
-                style={{ borderRadius: "10px", background: "linear-gradient(to right, #FF416C, #FF4B2B)" }}
+                className="btn btn-lg"
+                style={{
+                  width: "100%",
+                  backgroundColor: "#6FFFE9",
+                  color: "white",
+                }}
               >
                 Register
               </button>
-              <p className="mt-3 text-center">
-                Already have an account? <a href="login">Login</a>
+              <p className="small fw-bold mt-2 pt-1 mb-0">
+                Already have an account?{" "}
+                <a href="/login" className="link-danger">
+                  Login
+                </a>
               </p>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
