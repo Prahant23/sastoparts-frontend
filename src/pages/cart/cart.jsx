@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { deleteCartProductApi } from "../../apis/Api";
 import { toast } from "react-toastify";
 
@@ -8,6 +8,7 @@ const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getCartItems();
@@ -76,12 +77,16 @@ const Cart = () => {
     }
   };
 
+  const handleProceedToCheckout = () => {
+    const productIds = cartItems.map(item => item._id).join(',');
+    navigate('/checkout', { state: { productIds, totalPrice } });
+  };
+
   return (
-    <div className=" py-5" style={{backgroundColor:"#051923" , color:"#6FFFE9"}}>
+    <div className="py-5" style={{ backgroundColor: "#051923", color: "#6FFFE9" }}>
       <div className="">
         <div className="row mx-2">
-        <h2 className="mb-4">Your Shopping Cart</h2>
-
+          <h2 className="mb-4">Your Shopping Cart</h2>
           <div className="col-md-8">
             {cartItems.map((cart, index) => (
               <div key={index} className="card mb-3">
@@ -136,9 +141,12 @@ const Cart = () => {
                   <span className="badge bg-primary">{totalItems}</span>
                 </p>
                 <p>Total Price: ${totalPrice.toFixed(2)}</p>
-                <Link to="/checkout" className="btn btn-primary btn-block">
+                <button
+                  className="btn btn-primary btn-block"
+                  onClick={handleProceedToCheckout}
+                >
                   Proceed to Checkout
-                </Link>
+                </button>
               </div>
             </div>
           </div>

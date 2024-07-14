@@ -1,13 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { getLoggedInUserDetail } from "../apis/Api";
 import "./Navbar.css";
 import logo from "../assets/images/logo.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faEdit, faSignOutAlt, faShoppingCart, faCalendarAlt, faList } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const userFromLocalStorage = JSON.parse(localStorage.getItem("user"));
+  const [user, setUser] = useState(userFromLocalStorage || {});
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (userFromLocalStorage && userFromLocalStorage._id) {
+      getLoggedInUserDetail(userFromLocalStorage._id)
+        .then((res) => {
+          if (res.data.success) {
+            setUser(res.data.user);
+            localStorage.setItem("user", JSON.stringify(res.data.user)); // Update localStorage with latest user details
+          } else {
+            console.error("Failed to fetch user details");
+          }
+        })
+        .catch((err) => {
+          console.error("Error fetching user details:", err);
+        });
+    }
+  }, []);
 
   const logout = () => {
     localStorage.clear();
@@ -30,6 +49,8 @@ const Navbar = () => {
   const handleDash = () => {
     navigate("/");
   };
+
+  const placeholderAvatar = "https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI=";
 
   return (
     <nav className="navbar navbar-expand-lg" style={{ backgroundColor: "#1C2541" }}>
@@ -79,8 +100,8 @@ const Navbar = () => {
             {user && (
               <>
                 <li className="nav-item">
-                  <Link to={`/edit-profile/${user._id}`} className="nav-link" style={{ color: "#FFFFFF" }}>
-                    <FontAwesomeIcon icon={faUser} className="me-1" style={{ fontSize: "1.2rem", color: "#5BC0BE" }} />
+                  <Link to={`/edit-profile/${user._id}`} className="nav-link d-flex align-items-centre" style={{ color: "#FFFFFF" }}>
+                    <img src={user.avatar || placeholderAvatar} style={{ height: "30px", width: "30px", borderRadius: "50%" }} />
                   </Link>
                 </li>
                 <li className="nav-item">

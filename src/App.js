@@ -18,6 +18,7 @@ import Footer from "./components/Footer"
 import BookingForm from "./pages/bookingform";
 import BookingList from "./components/bookingList";
 import ChangePassword from "./pages/changepassword";
+import Order from "./pages/cart/order";
 
 
 function App() {
@@ -30,7 +31,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/cartpage" element={<Cart />} />
-        <Route path="/checkout" element={<CheckoutForm />} />
+        <Route path="/checkout" element={<Order />} />
         <Route path="/edit-profile/:id" element={<Profile />} />
         <Route path="/password/reset/:token" element={<ResetPassword />} />
         <Route path="/book-garage" element={<BookingForm />} />

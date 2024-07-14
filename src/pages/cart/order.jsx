@@ -1,21 +1,38 @@
-// PlaceOrder.jsx
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import './PlaceOrder.css'; // Import CSS for styling
 
 const Order = () => {
-  const [products, setProducts] = useState('');
+  const location = useLocation();
+  const [products, setProducts] = useState([]);
   const [totalAmount, setTotalAmount] = useState('');
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState('');
+
+  useEffect(() => {
+    if (location.state) {
+      const { productIds, totalPrice } = location.state;
+      setTotalAmount(totalPrice);
+      
+     
+      axios.get(`/api/products/${productIds}`)
+        .then(response => {
+          setProducts(response.data);
+        })
+        .catch(error => {
+          setError('Error fetching product details. Please try again later.');
+          console.error('Error fetching product details:', error);
+        });
+    }
+  }, [location.state]);
 
   const handlePlaceOrder = async (e) => {
     e.preventDefault();
 
     try {
       const orderData = {
-        products: products.split(',').map(productId => ({ productId, quantity: 1 })), // Assuming quantity is 1 per product
+        products: products.map(product => ({ productId: product._id, quantity: 1 })), // Assuming quantity is 1 per product
         totalAmount: parseFloat(totalAmount),
       };
 
@@ -50,8 +67,8 @@ const Order = () => {
             type="text"
             className="w-full p-2 border rounded"
             placeholder="Enter product IDs"
-            value={products}
-            onChange={(e) => setProducts(e.target.value)}
+            value={location.state ? location.state.productIds : ''}
+            readOnly
             required
           />
         </div>
@@ -74,6 +91,18 @@ const Order = () => {
           Place Order
         </button>
       </form>
+      
+      {/* Render product details if available */}
+      {products.length > 0 && (
+        <div className="mt-6">
+          <h2 className="text-lg font-semibold mb-2">Selected Products:</h2>
+          <ul className="list-disc list-inside">
+            {products.map(product => (
+              <li key={product._id}>{product.name} - ${product.price}</li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };

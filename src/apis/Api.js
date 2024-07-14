@@ -86,14 +86,14 @@ export const updateLoggedInUserDetail = (id, userData) => {
 };
 
 
-export const checkoutOrder = async (data) => {
-  try {
-    const response = await Api.post('/api/order/checkout', data);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
+// export const checkoutOrder = async (data) => {
+//   try {
+//     const response = await Api.post('/api/order/checkout', data);
+//     return response.data;
+//   } catch (error) {
+//     throw error;
+//   }
+// };
 
 export const changePasswordApi = (userId, passwords) =>
   Api.put(`/api/user/changePassword/${userId}`, passwords);

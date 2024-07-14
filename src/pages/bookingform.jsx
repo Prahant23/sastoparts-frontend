@@ -41,6 +41,7 @@ const BookingForm = () => {
     <div style={{ backgroundColor: "#051923", color: "#6FFFE9", padding: "20px" }}>
       <ToastContainer />
       <form onSubmit={handleSubmit} className="container" style={{ backgroundColor: "#051923", color: "#6FFFE9" }}>
+      <p style={{color: "#C4C4C4"}}>At Sastoaparts, we're dedicated to providing top-notch automotive care,<br /> where your satisfaction drives every repair and service we offer.</p>
         <h2>Book A Garage</h2>
         <div className="row">
           <div className="col-md-6">

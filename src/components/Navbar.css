@@ -17,22 +17,12 @@
 
 /* Navbar links */
 .navbar-nav .nav-link {
-  color: #000000; /* Change the link color */ 
+  color: #FFFFFF; /* Change the link color */
   font-weight: bold; /* Make the links bold */
   margin-right: 20px; /* Add some margin between links */
-}
-
-/* Dropdown */
-.dropdown-menu {
-  background-color: #ffffff; /* Change the background color */
-}
-
-.dropdown-item {
-  color: #000000; /* Change the text color */
-}
-
-.dropdown-item:hover {
-  background-color: #f8f9fa; /* Change the background color on hover */
+  display: flex; /* Use flexbox */
+  align-items: center; /* Center items vertically */
+  justify-content: center; /* Center items horizontally */
 }
 
 /* Cart icon */
@@ -73,4 +63,18 @@
 .btn-search:hover {
   background-color: #c82333; /* Change the background color on hover */
   border-color: #c82333; /* Change the border color on hover */
+}
+
+/* Align profile icon and image */
+.navbar .nav-link.d-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center items horizontally */
+}
+
+.navbar .nav-link img {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  margin-top: -5px;
 }
