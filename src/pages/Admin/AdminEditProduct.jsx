@@ -54,7 +54,7 @@ const AdminEditProducts = () => {
                     toast.error(res.data.message);
                 } else {
                     toast.success(res.data.message);
-                    navigate('/Admin/dashboard');
+                    navigate('/Admin');
                 }
             })
             .catch((err) => {
@@ -106,9 +106,10 @@ const AdminEditProducts = () => {
                             className="form-control mb-2"
                             required
                         >
-                            <option value="Clothes">Clothes</option>
-                            <option value="Shoes">Shoes</option>
-                            <option value="Accessories">Accessories</option>
+                            <option value="Engine and Transmission Components">Engine and Transmission Components</option>
+                            <option value="Chassis and Suspension Components">Chassis and Suspension Components</option>
+                            <option value="Electrical and Control Components">Electrical and Control Components</option>
+                            <option value="Others">Others</option>
                         </select>
                         <label className="mb-2">Product Image</label>
                         <input onChange={handleImageUpload} type="file" className="form-control mb-2" />

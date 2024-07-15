@@ -89,8 +89,8 @@ body {
 
 .add-to-cart-icon,
 .quick-view-icon {
-  background-color: #1db4e2;
-  color: #0e192a;
+  background-color: #1e2a3a;
+  color: #8ece16;
   border: none;
   padding: 10px;
   margin: 5px;
@@ -100,23 +100,23 @@ body {
 
 .add-to-cart-icon:hover,
 .quick-view-icon:hover {
-  background-color: #d4a600; /* Darker yellow for hover effect */
-  color: #0e192a;
+  background-color: #31b153; /* Darker yellow for hover effect */
+  color: #234372;
 }
 
 /* Modal styles */
 .modal-content {
-  background-color: #1e2a3a;
-  border: 1px solid #ffcc00;
+  background-color: #2e3a1e;
+  border: 1px solid #4fc329;
 }
 
 .modal-header,
 .modal-footer {
-  border-color: #ffcc00;
+  border-color: #13ab4e;
 }
 
 .modal-title {
-  color: #ffcc00;
+  color: #7518f0;
 }
 
 .modal-body p,

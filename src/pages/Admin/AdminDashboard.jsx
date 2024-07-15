@@ -69,7 +69,8 @@ const AdminDashboard = () => {
     if (!confirmDelete) {
       return;
     } else {
-      deleteProductAPI(id)
+      const authToken = localStorage.getItem('authToken');
+      deleteProductAPI(id, authToken)
         .then((res) => {
           if (res.data.success === false) {
             toast.error(res.data.message);
@@ -150,9 +151,10 @@ const AdminDashboard = () => {
                     value={category}
                   >
                     <option value="">Select Category</option>
-                    <option value="Clothes">Clothes</option>
-                    <option value="Shoes">Shoes</option>
-                    <option value="Accessories">Accessories</option>
+                    <option value="Engine and Transmission Components">Engine and Transmission Components</option>
+                    <option value="Chassis and Suspension Components">Chassis and Suspension Components</option>
+                    <option value="Electrical and Control Components">Electrical and Control Components</option>
+                    <option value="other">Other</option>
                   </select>
                   <label>Product Image</label>
                   <input

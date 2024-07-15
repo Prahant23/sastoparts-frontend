@@ -12,14 +12,14 @@ import AdminEditProducts from "./pages/Admin/AdminEditProduct";
 import ResetPassword from "./pages/ResetPassword";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import Cart from "./pages/cart/cart";
-import Profile from "./pages/eidtprofile";
+import Profile from "./pages/eidtprofile"; // Check spelling: "editprofile"?
 import CheckoutForm from "./pages/cart/order";
-import Footer from "./components/Footer"
+import Footer from "./components/Footer";
 import BookingForm from "./pages/bookingform";
 import BookingList from "./components/bookingList";
 import ChangePassword from "./pages/changepassword";
 import Order from "./pages/cart/order";
-
+import FAQs from "./pages/FAQs";
 
 function App() {
   return (
@@ -37,13 +37,20 @@ function App() {
         <Route path="/book-garage" element={<BookingForm />} />
         <Route path="/bookings" element={<BookingList />} />
         <Route path="/changepassword/:id" element={<ChangePassword />} />
+        <Route path="/FAQs" element={<FAQs/>} />
+        
+        {/* Protect routes with User authentication */}
         <Route element={<UserRoutes />}>
           {/* <Route path="/profile" element={<>} /> */}
         </Route>
+        
+        {/* Protect routes with Admin authentication */}
         <Route element={<AdminRoutes />}>
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/edit-product/:id" element={<AdminEditProducts />} />
         </Route>
+        
+        {/* Handle 404 errors */}
         <Route path="*" element={<h1>404</h1>} />
       </Routes>
       <Footer />

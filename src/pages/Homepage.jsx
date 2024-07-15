@@ -8,7 +8,7 @@ import bike from "../assets/images/Container.png";
 import Typography from '@mui/material/Typography';
 import Rating from '@mui/material/Rating';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart, faEye } from '@fortawesome/free-solid-svg-icons';
+import { faShoppingCart, faEye, faList } from '@fortawesome/free-solid-svg-icons';
 
 function Homepage() {
   const [products, setProducts] = useState([]);
@@ -40,7 +40,7 @@ function Homepage() {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          "http://localhost:4000/api/product/getProduct"
+          "http://localhost:4000/api/product/getProducts"
         );
         const data = await response.json();
         setProducts(data.products);
@@ -197,6 +197,7 @@ function Homepage() {
                     <img
                       src={product.productImage}
                       alt={product.productName}
+                      
                       className="h-fit"
                       style={{ height: '250px', width: '220px' }}
                     />

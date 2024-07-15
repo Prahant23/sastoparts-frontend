@@ -4,7 +4,7 @@ import { getLoggedInUserDetail } from "../apis/Api";
 import "./Navbar.css";
 import logo from "../assets/images/logo.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faEdit, faSignOutAlt, faShoppingCart, faCalendarAlt, faList } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faSignOutAlt, faShoppingCart, faCalendarAlt, faList, faKey } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
   const userFromLocalStorage = JSON.parse(localStorage.getItem("user"));
@@ -50,6 +50,10 @@ const Navbar = () => {
     navigate("/");
   };
 
+  const changePassword = () => {
+    navigate("/changepassword/:id");
+  };
+
   const placeholderAvatar = "https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI=";
 
   return (
@@ -72,23 +76,26 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             {user && user.isAdmin && (
-              <li className="nav-item">
-                <Link to="/admin" className="nav-link" onClick={editProducts} style={{ color: "#FFFFFF" }}>
-                  <FontAwesomeIcon icon={faEdit} className="me-1" style={{ fontSize: "1.2rem", color: "#5BC0BE" }} />
-                  Edit Products
-                </Link>
-              </li>
+              <>
+                <li className="nav-item">
+                  <Link to="/admin" className="nav-link" onClick={editProducts} style={{ color: "#FFFFFF" }}>
+                    <FontAwesomeIcon icon={faEdit} className="me-1" style={{ fontSize: "1.2rem", color: "#5BC0BE" }} />
+                    Edit Products
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/bookings" className="nav-link" style={{ color: "#FFFFFF" }}>
+                    <FontAwesomeIcon icon={faList} className="me-1" style={{ fontSize: "1.2rem", color: "#5BC0BE" }} />
+                    Bookings
+                  </Link>
+                </li>
+              </>
             )}
           </ul>
           <ul className="navbar-nav">
             <li className="nav-item">
               <Link to="/book-garage" className="btn nav-link" style={{ color: "#5BC0BE" }}>
                 <FontAwesomeIcon icon={faCalendarAlt} className="me-1" style={{ fontSize: "1.2rem" }} />
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/bookings" className="btn nav-link" style={{ color: "#5BC0BE" }}>
-                <FontAwesomeIcon icon={faList} className="me-1" style={{ fontSize: "1.2rem" }} />
               </Link>
             </li>
             <li className="nav-item">
@@ -100,9 +107,14 @@ const Navbar = () => {
             {user && (
               <>
                 <li className="nav-item">
-                  <Link to={`/edit-profile/${user._id}`} className="nav-link d-flex align-items-centre" style={{ color: "#FFFFFF" }}>
-                    <img src={user.avatar || placeholderAvatar} style={{ height: "30px", width: "30px", borderRadius: "50%" }} />
+                  <Link to={`/edit-profile/${user._id}`} className="nav-link d-flex align-items-center" style={{ color: "#FFFFFF" }}>
+                    <img src={user.avatar || placeholderAvatar} style={{ height: "30px", width: "30px", borderRadius: "50%" }} alt="avatar" />
                   </Link>
+                </li>
+                <li className="nav-item">
+                  <button className="btn nav-link" onClick={changePassword} style={{ color: "#5BC0BE" }}>
+                    <FontAwesomeIcon icon={faKey} className="me-1" style={{ fontSize: "1.2rem" }} />
+                  </button>
                 </li>
                 <li className="nav-item">
                   <button className="btn nav-link" onClick={logout} style={{ color: "#5BC0BE" }}>
@@ -115,12 +127,12 @@ const Navbar = () => {
               <>
                 <li className="nav-item">
                   <button onClick={navigateToLogin} className="btn nav-link" style={{ backgroundColor: "#5BC0BE", color: "white" }} type="button">
-                    login
+                    Login
                   </button>
                 </li>
                 <li className="nav-item">
                   <button onClick={navigateToRegister} className="btn nav-link" style={{ backgroundColor: "#5BC0BE", color: "white" }} type="button">
-                    register
+                    Register
                   </button>
                 </li>
               </>

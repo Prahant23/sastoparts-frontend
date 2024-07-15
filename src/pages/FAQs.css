@@ -1,0 +1,40 @@
+/* FAQs.css */
+
+/* Main container styles */
+.faq-page {
+    background-color: #1e2a3a; /* Light background color */
+    min-height: 100vh;
+    padding-bottom: 60px; /* Adjust as needed for footer */
+  }
+  
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* FAQ section styles */
+  .faq-section {
+    margin-top: 20px;
+  }
+  
+  .faq-item {
+    margin-bottom: 30px;
+  }
+  
+  .faq-item h4 {
+    color: #9eec0eae; 
+    margin-bottom: 10px;
+  }
+  
+  .faq-item p {
+    line-height: 1.6;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .container {
+      padding: 10px;
+    }
+  }
+  

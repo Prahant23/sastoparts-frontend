@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/images/logo.png";
 import img1 from "../assets/images/img1.png";
 import img2 from "../assets/images/img2.png";
@@ -16,6 +17,11 @@ const Footer = () => {
           accessories. What kind of parts do you need<br />
           you can get here soluta nobis</p>
       </div>
+      <li className="nav-item">
+        <Link to="/FAQs" className="nav-link" style={{ color: "#8ece16", alignItems :"bottom" }}>
+                    FAQs
+        </Link>
+     </li>
       <div className='footer-info'>
         <div className='footer-contact'>
           <h5>Baneshwor, Kathmandu</h5>
