@@ -7,13 +7,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faSignOutAlt, faShoppingCart, faCalendarAlt, faList, faKey } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
-  const userFromLocalStorage = JSON.parse(localStorage.getItem("user"));
-  const [user, setUser] = useState(userFromLocalStorage || {});
+  const userFromLocalStorage = JSON.parse(localStorage.getItem("user") || "{}");
+  const [user, setUser] = useState(userFromLocalStorage);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (userFromLocalStorage && userFromLocalStorage._id) {
-      getLoggedInUserDetail(userFromLocalStorage._id)
+    if (user._id) {
+      getLoggedInUserDetail(user._id)
         .then((res) => {
           if (res.data.success) {
             setUser(res.data.user);
@@ -26,7 +26,7 @@ const Navbar = () => {
           console.error("Error fetching user details:", err);
         });
     }
-  }, []);
+  }, [user._id]);
 
   const logout = () => {
     localStorage.clear();
@@ -34,25 +34,17 @@ const Navbar = () => {
     window.location.reload();
   };
 
-  const editProducts = () => {
-    navigate("/admin");
-  };
+  const editProducts = () => navigate("/admin");
 
-  const navigateToLogin = () => {
-    navigate("/login");
-  };
+  const editOrders = () => navigate("/manageorder");
 
-  const navigateToRegister = () => {
-    navigate("/register");
-  };
+  const navigateToLogin = () => navigate("/login");
 
-  const handleDash = () => {
-    navigate("/");
-  };
+  const navigateToRegister = () => navigate("/register");
 
-  const changePassword = () => {
-    navigate("/changepassword/:id");
-  };
+  const handleDash = () => navigate("/");
+
+  const changePassword = () => navigate(`/changepassword/${user._id}`);
 
   const placeholderAvatar = "https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI=";
 
@@ -74,13 +66,19 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            {user && user.isAdmin && (
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0 d-flex align-items-center">
+            {user.isAdmin && (
               <>
                 <li className="nav-item">
                   <Link to="/admin" className="nav-link" onClick={editProducts} style={{ color: "#FFFFFF" }}>
                     <FontAwesomeIcon icon={faEdit} className="me-1" style={{ fontSize: "1.2rem", color: "#5BC0BE" }} />
-                    Edit Products
+                    Products
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/manageorder" className="nav-link" onClick={editOrders} style={{ color: "#FFFFFF" }}>
+                    <FontAwesomeIcon icon={faEdit} className="me-1" style={{ fontSize: "1.2rem", color: "#5BC0BE" }} />
+                    Orders
                   </Link>
                 </li>
                 <li className="nav-item">
@@ -92,7 +90,7 @@ const Navbar = () => {
               </>
             )}
           </ul>
-          <ul className="navbar-nav">
+          <ul className="navbar-nav d-flex align-items-center">
             <li className="nav-item">
               <Link to="/book-garage" className="btn nav-link" style={{ color: "#5BC0BE" }}>
                 <FontAwesomeIcon icon={faCalendarAlt} className="me-1" style={{ fontSize: "1.2rem" }} />
@@ -104,7 +102,7 @@ const Navbar = () => {
                 <span className="badge rounded-pill badge-notification"></span>
               </Link>
             </li>
-            {user && (
+            {user ? (
               <>
                 <li className="nav-item">
                   <Link to={`/edit-profile/${user._id}`} className="nav-link d-flex align-items-center" style={{ color: "#FFFFFF" }}>
@@ -122,8 +120,7 @@ const Navbar = () => {
                   </button>
                 </li>
               </>
-            )}
-            {!user && (
+            ) : (
               <>
                 <li className="nav-item">
                   <button onClick={navigateToLogin} className="btn nav-link" style={{ backgroundColor: "#5BC0BE", color: "white" }} type="button">

@@ -93,10 +93,9 @@ export const createOrderApi = (data) => Api.post("/api/createOrder", data, confi
 export const getSingleOrderApi = (id) => Api.get(`/getSingleOrder/${id}`, config);
 export const getOrderByUserIDApi = (userId) => Api.get(`/api/createOrder/user${userId}`, config);
 export const getAllOrdersApi = () => Api.get("/orders", config);
-export const updateOrderStatusApi = (id, data) => Api.put(`/updateOrderStatus/${id}`, data, config);
-export const cancelOrderApi = (id) => Api.delete(`/cancelOrder/${id}`, config);
-export const updateReturnStatusApi = (id, data) => Api.put(`/updateReturnStatus/${id}`, data, config);
-
+export const updateOrderStatusApi = (id, status) => Api.put(`/api/createorder/updateOrderStatus/${id}`, { status }, config);
+export const cancelOrderApi = (id) => Api.delete(`/api/createorder/cancelOrder/${id}`, config);
+export const updateReturnStatusApi = (id, data) => Api.put(`/api/createorder/updateReturnStatus/${id}`, data, config);
 
 //shipping api
 export const createShippingAddressAPI = (data) => Api.post('/api/shipping/createShippingAddress', data, config);

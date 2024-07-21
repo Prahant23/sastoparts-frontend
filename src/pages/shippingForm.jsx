@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { createShippingAddressAPI, getLoggedInUserDetail } from '../apis/Api'; // Adjust the import path
+import '../pages/cart/shippingform.css'
 
 const ShippingForm = ({ userId, shippingInfo: initialShippingInfo, onSave }) => {
   const [shippingInfo, setShippingInfo] = useState(initialShippingInfo || {

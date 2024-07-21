@@ -30,7 +30,6 @@ const Register = () => {
     setPassword(e.target.value);
   };
 
-  
   const handleContactNumber = (e) => {
     setContactNumber(e.target.value);
   };
@@ -39,18 +38,16 @@ const Register = () => {
     setAddress(e.target.value);
   };
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const data = {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      password: password,
-      contactNumber:contactNumber,
-      address:address
-
+      firstName,
+      lastName,
+      email,
+      password,
+      contactNumber,
+      address,
     };
 
     registerApi(data)
@@ -64,19 +61,15 @@ const Register = () => {
       })
       .catch((err) => {
         console.log(err);
-        toast.error("please enter all fields");
+        toast.error("Please enter all fields");
       });
   };
 
   return (
     <section style={{ backgroundColor: "#051923", color: "#6FFFE9" }}>
       <div className="d-flex justify-content-center">
-        <div className="col-md-9 col-lg-6 col-xl-5 col-0">
-          {/* <img
-            src={bg}
-            alt="Sample image"
-            style={{ width: "100%", height: "fit-content" }}
-          /> */}
+        <div className="col-md-9 col-lg-6 col-xl-5 d-none d-md-block">
+          <img src={bg} alt="Sample image" style={{ width: "100%", height: "fit-content" }} />
         </div>
         <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1 pt-5">
           <form onSubmit={handleSubmit}>
@@ -121,8 +114,8 @@ const Register = () => {
               />
             </div>
             <div className="form-outline mb-4">
-              <label className="form-label" htmlFor="email">
-                contact Number
+              <label className="form-label" htmlFor="contactNumber">
+                Contact Number
               </label>
               <input
                 onChange={handleContactNumber}
@@ -133,8 +126,8 @@ const Register = () => {
               />
             </div>
             <div className="form-outline mb-4">
-              <label className="form-label" htmlFor="email">
-                  Address
+              <label className="form-label" htmlFor="address">
+                Address
               </label>
               <input
                 onChange={handleAddress}

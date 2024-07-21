@@ -22,6 +22,7 @@ import Order from "./pages/cart/order";
 import FAQs from "./pages/FAQs";
 import ShippingForm from "./pages/shippingForm";
 import SuccessPage from "./pages/cart/successPage";
+import AdminOrdersPage from "./pages/Admin/AdminOrder";
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
         <Route path="/order" element={<Order/>} />
         <Route path="/shipping" element={<ShippingForm/>} />
         <Route path="/success" element={<SuccessPage/>} />
+        <Route path="/manageorder" element={<AdminOrdersPage/>} />
 
         
         {/* Protect routes with User authentication */}

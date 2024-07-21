@@ -159,7 +159,7 @@ function Homepage() {
                   </div>
                   <div className="product-info">
                     <h5>{product.productName}</h5>
-                    <p>${product.productPrice}</p>
+                    <p>Rs{product.productPrice}</p>
                     {/* Add Rating component with Bootstrap classes */}
                     <Rating
                       start={0}
@@ -213,7 +213,7 @@ function Homepage() {
                   </div>
                   <div className="product-info">
                     <h5>{product.productName}</h5>
-                    <p>${product.productPrice}</p>
+                    <p>Rs{product.productPrice}</p>
                     {/* Add Rating component with Bootstrap classes */}
                     <Rating
                       start={0}
@@ -280,7 +280,7 @@ function Homepage() {
                   <div className="col-md-6">
                     <h4 className="mt-3">{selectedProduct.productName}</h4>
                     <p>{selectedProduct.productDescription}</p>
-                    <p className="h5">Price: ${selectedProduct.productPrice}</p>
+                    <p className="h5">Price: Rs{selectedProduct.productPrice}</p>
                   </div>
                 </div>
               </div>
