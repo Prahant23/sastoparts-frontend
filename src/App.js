@@ -20,6 +20,9 @@ import BookingList from "./components/bookingList";
 import ChangePassword from "./pages/changepassword";
 import Order from "./pages/cart/order";
 import FAQs from "./pages/FAQs";
+import ShippingForm from "./pages/shippingForm";
+import SuccessPage from "./pages/cart/successPage";
+
 
 function App() {
   return (
@@ -38,6 +41,10 @@ function App() {
         <Route path="/bookings" element={<BookingList />} />
         <Route path="/changepassword/:id" element={<ChangePassword />} />
         <Route path="/FAQs" element={<FAQs/>} />
+        <Route path="/order" element={<Order/>} />
+        <Route path="/shipping" element={<ShippingForm/>} />
+        <Route path="/success" element={<SuccessPage/>} />
+
         
         {/* Protect routes with User authentication */}
         <Route element={<UserRoutes />}>

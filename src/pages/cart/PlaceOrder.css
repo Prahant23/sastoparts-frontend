@@ -1,34 +1,148 @@
-/* PlaceOrder.css */
-
-.container {
-  max-width: 600px;
-  margin: auto;
-  padding: 20px;
+/* General styles */
+body {
+  background-color: #0e192a;
+  color: #f5f5f5;
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
 
-.input-field {
-  margin-bottom: 1rem;
+/* Review page section */
+.review-page {
+  background-color: #0d2a54;
+  color: #f5f5f5;
+  padding: 2rem;
 }
 
-.error-message {
-  color: red;
-  margin-bottom: 1rem;
+.review-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 3%;
+  background-color: #1e2a3a;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.305);
+  border-radius: 10px;
 }
 
-.success-message {
-  color: green;
-  margin-bottom: 1rem;
+/* Cart items */
+.cart-items {
+  margin: 0 3% 2% 3%;
+  padding: 2% 1%;
+  background-color: #1e2a3a;
+  border-radius: 10px;
 }
 
-.button {
-  background-color: #3498db;
-  color: white;
-  padding: 10px 20px;
+.cart-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  height: 100px;
+  background-color: #1e373a;
+  padding: 1%;
+  border-radius: 5px;
+}
+
+.cart-item-image {
+  width: 100px;
+  height: auto;
+  border-radius: 5px;
+}
+
+.cart-item-details {
+  margin-left: 2rem;
+  color: #b49393;
+}
+
+.cart-item-name {
+  color: #ffcc00;
+  font-weight: bold;
+}
+
+.total-price {
+  font-size: 23px;
+  color: #18a313;
+}
+
+/* Payment method */
+.payment-method {
+  margin-top: 2%;
+  color: #0bf5ed;
+}
+
+.payment-method label {
+  color: #1365fc;
+}
+
+/* Buttons */
+button {
+  background-color: #2035d2;
+  color: #f5f5f5;
   border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
   cursor: pointer;
-  border-radius: 4px;
 }
 
-.button:hover {
-  background-color: #2980b9;
+button:hover {
+  background-color: #1c9bc9;
+}
+
+.print-button {
+  background-color: #2035d2;
+  color: #f5f5f5;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.print-button:hover {
+  background-color: #1c9bc9;
+}
+
+/* Right shipping summary */
+.right-shipping-summary {
+  background-color: #2e3a1e;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.review-cart-summary {
+  background-color: #18222e;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-top: 2%;
+}
+
+.cart-title {
+  color: #ffcc00;
+}
+
+.total-price {
+  color: #18a313;
+}
+
+/* Form styles */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #2e3a1e;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+form .form-label {
+  color: #ffcc00;
+}
+
+form .form-control {
+  background-color: #1e2a3a;
+  color: #f5f5f5;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem;
+}
+
+form .form-control:focus {
+  outline: none;
+  border: 1px solid #ffcc00;
 }

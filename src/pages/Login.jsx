@@ -66,7 +66,7 @@ const Login = () => {
       })
       .catch((err) => {
         console.log(err);
-        toast.error("Internal server error");
+        toast.error("Please enter email and password");
       });
   };
 

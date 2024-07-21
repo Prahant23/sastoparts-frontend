@@ -9,14 +9,23 @@ import Typography from '@mui/material/Typography';
 import Rating from '@mui/material/Rating';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faEye, faList } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from "react-router-dom";
 
 function Homepage() {
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const history = useNavigate();
 
   const addToCart = async (product) => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      toast.error("Please log in first to add items to the cart");
+      history("/login"); // Redirect to login page
+      return;
+    }
+
     try {
       await axios.post(
         "http://localhost:4000/api/cart/addtocart",
@@ -26,7 +35,7 @@ function Homepage() {
         },
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );

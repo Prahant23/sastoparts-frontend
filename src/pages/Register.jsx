@@ -10,6 +10,8 @@ const Register = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [contactNumber, setContactNumber] = useState("");
+  const [address, setAddress] = useState("");
   const navigate = useNavigate();
 
   const handleFirstName = (e) => {
@@ -28,6 +30,16 @@ const Register = () => {
     setPassword(e.target.value);
   };
 
+  
+  const handleContactNumber = (e) => {
+    setContactNumber(e.target.value);
+  };
+
+  const handleAddress = (e) => {
+    setAddress(e.target.value);
+  };
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -36,6 +48,9 @@ const Register = () => {
       lastName: lastName,
       email: email,
       password: password,
+      contactNumber:contactNumber,
+      address:address
+
     };
 
     registerApi(data)
@@ -49,7 +64,7 @@ const Register = () => {
       })
       .catch((err) => {
         console.log(err);
-        toast.error("Internal server error");
+        toast.error("please enter all fields");
       });
   };
 
@@ -57,11 +72,11 @@ const Register = () => {
     <section style={{ backgroundColor: "#051923", color: "#6FFFE9" }}>
       <div className="d-flex justify-content-center">
         <div className="col-md-9 col-lg-6 col-xl-5 col-0">
-          <img
+          {/* <img
             src={bg}
             alt="Sample image"
             style={{ width: "100%", height: "fit-content" }}
-          />
+          /> */}
         </div>
         <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1 pt-5">
           <form onSubmit={handleSubmit}>
@@ -103,6 +118,30 @@ const Register = () => {
                 id="email"
                 className="form-control form-control-lg"
                 placeholder="Enter a valid email address"
+              />
+            </div>
+            <div className="form-outline mb-4">
+              <label className="form-label" htmlFor="email">
+                contact Number
+              </label>
+              <input
+                onChange={handleContactNumber}
+                type="number"
+                id="contactNumber"
+                className="form-control form-control-lg"
+                placeholder="Enter your contact number"
+              />
+            </div>
+            <div className="form-outline mb-4">
+              <label className="form-label" htmlFor="email">
+                  Address
+              </label>
+              <input
+                onChange={handleAddress}
+                type="text"
+                id="address"
+                className="form-control form-control-lg"
+                placeholder="Enter your address"
               />
             </div>
             <div className="form-outline mb-3">

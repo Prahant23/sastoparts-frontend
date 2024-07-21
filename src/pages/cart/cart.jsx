@@ -78,8 +78,8 @@ const Cart = () => {
   };
 
   const handleProceedToCheckout = () => {
-    const productIds = cartItems.map(item => item._id).join(',');
-    navigate('/checkout', { state: { productIds, totalPrice } });
+    // const productIds = cartItems.map(item => item._id).join(',');
+    navigate('/shipping', { state: { cartItems, totalPrice } });
   };
 
   return (

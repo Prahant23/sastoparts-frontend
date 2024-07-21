@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { createBookingAPI } from "../apis/Api";
+import React, { useState, useEffect } from "react";
+import { createBookingAPI, getUserBookingsAPI, deleteBookingAPI } from "../apis/Api";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-const BookingForm = () => {
+const BookingForm = ({ userId }) => {
   const [formData, setFormData] = useState({
     fullName: "",
     carNumber: "",
@@ -12,21 +12,64 @@ const BookingForm = () => {
     contactNumber: "",
   });
 
-  const [newBooking, setNewBooking] = useState(null); // State to hold the new booking data
+  const [userBookings, setUserBookings] = useState([]);
+
+  useEffect(() => {
+    if (userId) {
+      fetchUserBookings(userId);
+    }
+  }, [userId]);
+
+  const fetchUserBookings = async (userId) => {
+    try {
+      const response = await getUserBookingsAPI(userId);
+      if (response.data) {
+        setUserBookings(response.data);
+      } else {
+        toast.error("No data returned from API");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Error fetching user bookings");
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await deleteBookingAPI(id);
+      toast.success("Booking deleted successfully");
+      fetchUserBookings(userId); // Refresh bookings after delete
+    } catch (error) {
+      console.error(error);
+      toast.error("Error deleting booking");
+    }
+  };
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    // Validation rules
+    if (name === "fullName" && !/^[a-zA-Z\s]*$/.test(value)) {
+      return;
+    }
+    if (name === "carNumber" && !/^[a-zA-Z0-9]*$/.test(value)) {
+      return;
+    }
+    if (name === "contactNumber" && !/^\d*$/.test(value)) {
+      return;
+    }
+
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await createBookingAPI(formData);
-      const createdBooking = response.data; // Assuming API returns the newly created booking
-      setNewBooking(createdBooking); // Update state with new booking data
+      await createBookingAPI(formData);
+      fetchUserBookings(userId); // Fetch user bookings after successful creation
       toast.success("Booking created successfully");
       setFormData({
         fullName: "",
@@ -54,7 +97,11 @@ const BookingForm = () => {
     <div style={{ backgroundColor: "#051923", color: "#6FFFE9", padding: "20px" }}>
       <ToastContainer />
       <form onSubmit={handleSubmit} className="container" style={{ backgroundColor: "#051923", color: "#6FFFE9" }}>
-        <p style={{color: "#C4C4C4"}}>At Sastoaparts, we're dedicated to providing top-notch automotive care,<br /> where your satisfaction drives every repair and service we offer.</p>
+        <p style={{ color: "#C4C4C4" }}>
+          At Sastoaparts, we're dedicated to providing top-notch automotive care,
+          <br />
+          where your satisfaction drives every repair and service we offer.
+        </p>
         <h2>Book A Garage</h2>
         <div className="row">
           <div className="col-md-6">
@@ -104,7 +151,7 @@ const BookingForm = () => {
                 value={formData.date}
                 onChange={handleChange}
                 className="form-control"
-                min={getTodayDate()} // Set min attribute to today's date
+                min={getTodayDate()}
                 required
               />
             </div>
@@ -123,20 +170,29 @@ const BookingForm = () => {
             </div>
           </div>
         </div>
-        <button type="submit" className="btn mt-3" style={{ backgroundColor: "#6FFFE9" }}>Book Garage</button>
+        <button type="submit" className="btn mt-3" style={{ backgroundColor: "#6FFFE9" }}>
+          Book Garage
+        </button>
       </form>
 
-      {/* Display newly created booking details */}
-      {newBooking && (
-        <div className="mt-4">
-          <h3>Your Booking Details:</h3>
-          <p><strong>Full Name:Prashant Bist</strong> {newBooking.fullName}</p>
-          <p><strong>Car Number: 33333</strong> {newBooking.carNumber}</p>
-          <p><strong>Problem Description:engine is making noise</strong> {newBooking.problemDescription}</p>
-          <p><strong>Date:16th july</strong> {newBooking.date}</p>
-          <p><strong>Contact Number:9999999999</strong> {newBooking.contactNumber}</p>
-        </div>
-      )}
+      {/* Display user's bookings */}
+      <div className="mt-4">
+        <h2>Your Bookings</h2>
+        <ul>
+          {userBookings.map((booking) => (
+            <li key={booking._id}>
+              <p>Full Name: {booking.fullName}</p>
+              <p>Car Number: {booking.carNumber}</p>
+              <p>Problem Description: {booking.problemDescription}</p>
+              <p>Date: {booking.date}</p>
+              <p>Contact Number: {booking.contactNumber}</p>
+              <button onClick={() => handleDelete(booking._id)} className="btn btn-danger">
+                Delete
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
