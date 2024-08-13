@@ -4,6 +4,8 @@ import { registerApi } from "../apis/Api";
 import bg from "../assets/images/Rectangle 1587.png";
 import logo from "../assets/images/logo.png";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const Register = () => {
   const [firstName, setFirstName] = useState("");
@@ -12,34 +14,81 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [contactNumber, setContactNumber] = useState("");
   const [address, setAddress] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [passwordStrength, setPasswordStrength] = useState("");
+  const [passwordFocus, setPasswordFocus] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  const handleFirstName = (e) => {
-    setFirstName(e.target.value);
+  const handleChange = (setter) => (e) => setter(e.target.value);
+
+  const validatePassword = (password) => {
+    let strength = "";
+    let error = null;
+
+    if (password.length < 8) {
+      error = "Password must be at least 8 characters long.";
+      strength = "weak";
+    } else if (password.length > 12) {
+      error = "Password must be no more than 12 characters long.";
+      strength = "weak";
+    } else if (!/[A-Z]/.test(password)) {
+      error = "Password must contain at least one uppercase letter.";
+      strength = "weak";
+    } else if (!/[a-z]/.test(password)) {
+      error = "Password must contain at least one lowercase letter.";
+      strength = "weak";
+    } else if (!/\d/.test(password)) {
+      error = "Password must contain at least one digit.";
+      strength = "medium";
+    } else if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+      error = "Password must contain at least one special character.";
+      strength = "medium";
+    } else {
+      strength = "strong";
+    }
+
+    setPasswordStrength(strength);
+    return error;
   };
 
-  const handleLastName = (e) => {
-    setLastName(e.target.value);
+  const handlePasswordChange = (e) => {
+    const newPassword = e.target.value;
+    setPassword(newPassword);
+    const error = validatePassword(newPassword);
+    setPasswordError(error);
   };
 
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleContactNumber = (e) => {
-    setContactNumber(e.target.value);
-  };
-
-  const handleAddress = (e) => {
-    setAddress(e.target.value);
+  const getPasswordStrengthColor = () => {
+    switch (passwordStrength) {
+      case "weak":
+        return "red";
+      case "medium":
+        return "orange";
+      case "strong":
+        return "green";
+      default:
+        return "#ced4da";
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!firstName || !lastName || !email || !password || !contactNumber || !address) {
+      toast.error("Please fill in all fields");
+      return;
+    }
+
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
+    if (passwordError) {
+      toast.error(passwordError);
+      return;
+    }
 
     const data = {
       firstName,
@@ -52,16 +101,16 @@ const Register = () => {
 
     registerApi(data)
       .then((res) => {
-        if (res.data.success === true) {
+        if (res.data.success) {
           toast.success(res.data.message);
-          navigate("/login"); // Redirect to login page after successful registration
+          navigate("/login");
         } else {
           toast.error(res.data.message);
         }
       })
       .catch((err) => {
-        console.log(err);
-        toast.error("Please enter all fields");
+        console.error(err);
+        toast.error("Registration failed. Please try again.");
       });
   };
 
@@ -69,12 +118,12 @@ const Register = () => {
     <section style={{ backgroundColor: "#051923", color: "#6FFFE9" }}>
       <div className="d-flex justify-content-center">
         <div className="col-md-9 col-lg-6 col-xl-5 d-none d-md-block">
-          <img src={bg} alt="Sample image" style={{ width: "100%", height: "fit-content" }} />
+          <img src={bg} alt="Background" style={{ width: "100%", height: "fit-content" }} />
         </div>
         <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1 pt-5">
           <form onSubmit={handleSubmit}>
             <div className="d-flex justify-content-center flex-direction-row">
-              <img src={logo} alt="logo" />
+              <img src={logo} alt="Logo" />
             </div>
             <h2 className="text-center">Register</h2>
             <div className="form-outline mb-4">
@@ -82,11 +131,13 @@ const Register = () => {
                 First Name
               </label>
               <input
-                onChange={handleFirstName}
+                onChange={handleChange(setFirstName)}
                 type="text"
                 id="firstName"
                 className="form-control form-control-lg"
                 placeholder="Enter your first name"
+                value={firstName}
+                required
               />
             </div>
             <div className="form-outline mb-4">
@@ -94,11 +145,13 @@ const Register = () => {
                 Last Name
               </label>
               <input
-                onChange={handleLastName}
+                onChange={handleChange(setLastName)}
                 type="text"
                 id="lastName"
                 className="form-control form-control-lg"
                 placeholder="Enter your last name"
+                value={lastName}
+                required
               />
             </div>
             <div className="form-outline mb-4">
@@ -106,11 +159,13 @@ const Register = () => {
                 Email address
               </label>
               <input
-                onChange={handleEmail}
+                onChange={handleChange(setEmail)}
                 type="email"
                 id="email"
                 className="form-control form-control-lg"
                 placeholder="Enter a valid email address"
+                value={email}
+                required
               />
             </div>
             <div className="form-outline mb-4">
@@ -118,11 +173,13 @@ const Register = () => {
                 Contact Number
               </label>
               <input
-                onChange={handleContactNumber}
-                type="number"
+                onChange={handleChange(setContactNumber)}
+                type="text"
                 id="contactNumber"
                 className="form-control form-control-lg"
                 placeholder="Enter your contact number"
+                value={contactNumber}
+                required
               />
             </div>
             <div className="form-outline mb-4">
@@ -130,24 +187,70 @@ const Register = () => {
                 Address
               </label>
               <input
-                onChange={handleAddress}
+                onChange={handleChange(setAddress)}
                 type="text"
                 id="address"
                 className="form-control form-control-lg"
                 placeholder="Enter your address"
+                value={address}
+                required
               />
             </div>
-            <div className="form-outline mb-3">
+            <div className="form-outline mb-4" style={{ position: 'relative' }}>
               <label className="form-label" htmlFor="password">
                 Password
               </label>
               <input
-                onChange={handlePassword}
-                type="password"
+                onChange={handlePasswordChange}
+                type={showPassword ? "text" : "password"}
                 id="password"
                 className="form-control form-control-lg"
                 placeholder="Enter password"
+                value={password}
+                required
+                style={{
+                  borderColor: getPasswordStrengthColor(),
+                  transition: "border-color 0.3s ease",
+                }}
+                onFocus={() => setPasswordFocus(true)}
+                onBlur={() => setPasswordFocus(false)}
               />
+              <span
+                onClick={() => setShowPassword(!showPassword)}
+                style={{
+                  position: 'absolute',
+                  top: '70%',
+                  right: '10px',
+                  transform: 'translateY(-50%)',
+                  cursor: 'pointer',
+                }}
+              >
+                <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
+              </span>
+              {passwordFocus && (
+                <div
+                  className="password-strength"
+                  style={{
+                    color: getPasswordStrengthColor(),
+                    fontSize: '0.875rem',
+                    marginTop: '0.5rem',
+                  }}
+                >
+                  Strength: {passwordStrength.charAt(0).toUpperCase() + passwordStrength.slice(1)}
+                </div>
+              )}
+              {passwordError && passwordFocus && (
+                <div
+                  className="password-error"
+                  style={{
+                    color: 'red',
+                    fontSize: '0.875rem',
+                    marginTop: '0.25rem',
+                  }}
+                >
+                  {passwordError}
+                </div>
+              )}
             </div>
             <div className="text-center text-lg-start pt-2">
               <button

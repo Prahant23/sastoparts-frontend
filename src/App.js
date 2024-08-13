@@ -23,6 +23,7 @@ import FAQs from "./pages/FAQs";
 import ShippingForm from "./pages/shippingForm";
 import SuccessPage from "./pages/cart/successPage";
 import AdminOrdersPage from "./pages/Admin/AdminOrder";
+import VerifyEmail from "./pages/verifyemail";
 
 
 function App() {
@@ -37,7 +38,7 @@ function App() {
         <Route path="/cartpage" element={<Cart />} />
         <Route path="/checkout" element={<Order />} />
         <Route path="/edit-profile/:id" element={<Profile />} />
-        <Route path="/password/reset/:token" element={<ResetPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/book-garage" element={<BookingForm />} />
         <Route path="/bookings" element={<BookingList />} />
         <Route path="/changepassword/:id" element={<ChangePassword />} />
@@ -46,6 +47,7 @@ function App() {
         <Route path="/shipping" element={<ShippingForm/>} />
         <Route path="/success" element={<SuccessPage/>} />
         <Route path="/manageorder" element={<AdminOrdersPage/>} />
+        <Route path="/verify-email/:token" element={<VerifyEmail />} />
 
         
         {/* Protect routes with User authentication */}

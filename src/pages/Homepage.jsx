@@ -84,7 +84,7 @@ function Homepage() {
         <img src={bike} alt="Bike" style={{ width: "80%" }} />
       </div>
 
-      <div className="">
+      <div className="text-black">
         <div className=" py-5">
           <div className="text-center ">
             <div className="d-flex justify-content-evenly">
@@ -94,18 +94,18 @@ function Homepage() {
                 </div>
                 <div>
                   <div className="text-start">
-                    <h4 style={{color:"#6FFFE9"}}>Free Home Delivery</h4>
+                    <h4 style={{color:"#030304"}}>Free Home Delivery</h4>
                     <p>Provide free home delivery for all<br/>
                     product over Rs10000</p>
                   </div>
                 </div>
               </div>
-              <div className="mx-5 d-flex gap-2">
+              <div className="mx-5 d-flex gap-2 text-black">
                 <div className="p-2 h-fill">  
                   <i className="fas fa-check-circle fa-2x mb-3"></i>
                 </div>
-                <div className="text-start">
-                  <h4 style={{color:"#6FFFE9"}}>Quality Products</h4>
+                <div className="text-start text-black">
+                  <h4 style={{color:"#030304"}}>Quality Products</h4>
                   <p>We ensure our product quality <br/>all
                   times</p>
                 </div>
@@ -115,7 +115,7 @@ function Homepage() {
                   <i className="fas fa-phone fa-2x mb-3"></i>
                 </div>
                 <div className="text-start">
-                  <h4 style={{color:"#6FFFE9"}}>Booking</h4>
+                  <h4 style={{color:"#030304"}}>Booking</h4>
                   <p>To satisfy our customer we try to<br/> give
                   support online</p>
                 </div>
@@ -140,8 +140,8 @@ function Homepage() {
 
       <div className=" product-section">
         <div className="text-center">
-          <h2 className="mb-3" style={{color:"#6FFFE9"}}>Best selling product</h2>
-          <p style={{color :" #C4C4C4"}}>All best seller product are now available for you and your can buy this product <br />
+          <h2 className="mb-3" style={{color:"#030304"}}>Best selling product</h2>
+          <p style={{color :" #030304"}}>All best seller product are now available for you and your can buy this product <br />
           from here any time any where so shop now</p>
         </div>
         <div className="col-12">
@@ -195,7 +195,7 @@ function Homepage() {
 
       <div className=" product-section">
         <div className="text-center">
-          <h2 className="mb-3" style={{color:"#6FFFE9"}}>All of Our Products</h2>
+          <h2 className="mb-3" style={{color:"#030304"}}>All of Our Products</h2>
         </div>
         <div className="col-12">
           <div className="row">

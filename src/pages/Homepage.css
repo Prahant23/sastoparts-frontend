@@ -1,6 +1,6 @@
 /* General styles */
 body {
-  background-color: #0e192a;
+  background-color: #cbccd0;
   color: #f5f5f5;
   margin: 0;
   font-family: Arial, sans-serif;
@@ -8,13 +8,13 @@ body {
 
 /* Hero header */
 .hero-header {
-  background-color: #0e192a;
+  background-color: #fbfbfb;
   padding: 60px 0;
   text-align: center;
 }
 
 .hero-header h1 {
-  color: #ffcc00;
+  color: #050401;
 }
 
 /* Search bar */
@@ -29,7 +29,7 @@ body {
   padding: 10px;
   border-radius: 5px;
   border: none;
-  background-color: #1e2a3a;
+  background-color: #f2f4f6;
   color: #f5f5f5;
 }
 
@@ -40,24 +40,24 @@ body {
 }
 
 .search_icon i {
-  color: #ffcc00;
+  color: #080806;
 }
 
 /* Product section */
 .product-section {
-  background-color: #0e192a;
+  background-color: #d3d4d7;
   padding: 20px 0;
 }
 
 .section-title {
-  color: #2035d2;
+  color: #010106;
   margin-bottom: 20px;
   text-align: center;
 }
 
 .product-card {
-  background-color: #1e2a3a;
-  border: 1px solid #2317cb;
+  background-color: #9d9fa2;
+  border: 1px solid #030304;
   border-radius: 10px;
   padding: 15px;
   margin-bottom: 20px;
@@ -72,12 +72,12 @@ body {
 }
 
 .product-info h5 {
-  color: #1c9bc9;
+  color: #02090b;
   margin-bottom: 10px;
 }
 
 .product-info p {
-  color: #18a313;
+  color: #010701;
 }
 
 /* Product actions */
@@ -90,7 +90,7 @@ body {
 .add-to-cart-icon,
 .quick-view-icon {
   background-color: #1e2a3a;
-  color: #8ece16;
+  color: #0c0e09;
   border: none;
   padding: 10px;
   margin: 5px;
@@ -101,18 +101,18 @@ body {
 .add-to-cart-icon:hover,
 .quick-view-icon:hover {
   background-color: #31b153; /* Darker yellow for hover effect */
-  color: #234372;
+  color: #0a0d10;
 }
 
 /* Modal styles */
 .modal-content {
   background-color: #2e3a1e;
-  border: 1px solid #4fc329;
+  border: 1px solid #9ca799;
 }
 
 .modal-header,
 .modal-footer {
-  border-color: #13ab4e;
+  border-color: #040605;
 }
 
 .modal-title {
@@ -141,6 +141,6 @@ body {
 
 .product-actions .fa-shopping-cart:hover,
 .product-actions .fa-eye:hover {
-  color: #ff6f61; /* Change to any hover color you prefer */
+  color: #f4eaea; /* Change to any hover color you prefer */
 }
 

@@ -7,12 +7,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faSignOutAlt, faShoppingCart, faCalendarAlt, faList, faKey } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
-  const userFromLocalStorage = JSON.parse(localStorage.getItem("user") || "{}");
+  // Retrieve user from localStorage and handle potential JSON parsing errors
+  let userFromLocalStorage = {};
+  try {
+    const storedUser = localStorage.getItem("user");
+    userFromLocalStorage = storedUser ? JSON.parse(storedUser) : {};
+  } catch (error) {
+    console.error("Failed to parse user from localStorage:", error);
+  }
+
   const [user, setUser] = useState(userFromLocalStorage);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user._id) {
+    // Ensure user._id exists and is valid before making the API call
+    if (user._id && typeof user._id === 'string') {
       getLoggedInUserDetail(user._id)
         .then((res) => {
           if (res.data.success) {
@@ -44,12 +53,18 @@ const Navbar = () => {
 
   const handleDash = () => navigate("/");
 
-  const changePassword = () => navigate(`/changepassword/${user._id}`);
+  const changePassword = () => {
+    if (user._id) {
+      navigate(`/changepassword/${user._id}`);
+    } else {
+      console.error("User ID is not available for changing password.");
+    }
+  };
 
   const placeholderAvatar = "https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI=";
 
   return (
-    <nav className="navbar navbar-expand-lg" style={{ backgroundColor: "#1C2541" }}>
+    <nav className="navbar navbar-expand-lg" style={{ backgroundColor: "#dfe1e6" }}>
       <div className="container-fluid mx-2">
         <Link className="navbar-brand text-danger fw-bold" to="/" onClick={handleDash}>
           <img src={logo} alt="logo" style={{ height: "50px" }} />
@@ -110,12 +125,22 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <button className="btn nav-link" onClick={changePassword} style={{ color: "#5BC0BE" }}>
+                  <button 
+                    className="btn nav-link" 
+                    onClick={changePassword} 
+                    style={{ color: "#5BC0BE" }} 
+                    type="button"
+                  >
                     <FontAwesomeIcon icon={faKey} className="me-1" style={{ fontSize: "1.2rem" }} />
                   </button>
                 </li>
                 <li className="nav-item">
-                  <button className="btn nav-link" onClick={logout} style={{ color: "#5BC0BE" }}>
+                  <button 
+                    className="btn nav-link" 
+                    onClick={logout} 
+                    style={{ color: "#5BC0BE" }} 
+                    type="button"
+                  >
                     <FontAwesomeIcon icon={faSignOutAlt} className="me-1" style={{ fontSize: "1.2rem" }} />
                   </button>
                 </li>
@@ -123,12 +148,22 @@ const Navbar = () => {
             ) : (
               <>
                 <li className="nav-item">
-                  <button onClick={navigateToLogin} className="btn nav-link" style={{ backgroundColor: "#5BC0BE", color: "white" }} type="button">
+                  <button 
+                    onClick={navigateToLogin} 
+                    className="btn nav-link" 
+                    style={{ backgroundColor: "#5BC0BE", color: "white" }} 
+                    type="button"
+                  >
                     Login
                   </button>
                 </li>
                 <li className="nav-item">
-                  <button onClick={navigateToRegister} className="btn nav-link" style={{ backgroundColor: "#5BC0BE", color: "white" }} type="button">
+                  <button 
+                    onClick={navigateToRegister} 
+                    className="btn nav-link" 
+                    style={{ backgroundColor: "#5BC0BE", color: "white" }} 
+                    type="button"
+                  >
                     Register
                   </button>
                 </li>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { forgotPasswordApi } from '../../apis/Api';
 
+
 export default function ForgetPassword() {
   const [showModal, setShowModal] = useState(false);
   const [email, setEmail] = useState('');

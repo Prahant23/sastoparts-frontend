@@ -22,7 +22,7 @@ const Footer = () => {
                     FAQs
         </Link>
      </li>
-      <div className='footer-info'>
+      <div className='footer-info text-black'>
         <div className='footer-contact'>
           <h5>Baneshwor, Kathmandu</h5>
           <h5>sastoparts23@gmail.com</h5>

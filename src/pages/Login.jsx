@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { forgotPasswordApi, loginApi } from "../apis/Api";
+import { forgotPasswordApi, loginApi, checkSessionApi } from "../apis/Api"; // Import checkSessionApi
 import { useNavigate } from "react-router-dom";
 import bg from "../assets/images/Rectangle 1587.png";
 import logo from "../assets/images/logo.png";
@@ -8,194 +8,207 @@ import logo from "../assets/images/logo.png";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
   const [forgotPasswordEmail, setForgotPasswordEmail] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
+  const navigate = useNavigate();
 
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-  };
-  const handleForgotPasswordEmail = (e) => {
-    setForgotPasswordEmail(e.target.value);
-  };
-
-  const forgotPassword = (e) => {
-    e.preventDefault();
-    const data = {
-      email: forgotPasswordEmail,
-    };
-    forgotPasswordApi(data)
-      .then((res) => {
-        if (res.data.success === true) {
-          toast.success(res.data.message);
-        } else {
-          toast.error(res.data.message);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        toast.error(err.response?.data?.message || "Internal server error");
-      });
-  };
-
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const data = {
-      email: email,
-      password: password,
-    };
-
-    loginApi(data)
-      .then((res) => {
-        if (res.data.success === true) {
-          toast.success(res.data.message);
-          navigate("/");
-
-          // Save token in local storage
-          localStorage.setItem("token", res.data.token);
-
-          // Save user details in local storage
-          localStorage.setItem("user", JSON.stringify(res.data.user));
-        } else {
-          toast.error(res.data.message);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        toast.error("Please enter email and password");
-      });
-  };
-
-  // Use useEffect for redirecting to the homepage
   useEffect(() => {
-    const isLoggedIn = localStorage.getItem("token");
-
-    if (isLoggedIn) {
-      window.location.replace("/");
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/");
     }
-  }, []);
+  }, [navigate]);
 
+  // Session check useEffect
+  useEffect(() => {
+    const checkSession = async () => {
+      try {
+        const response = await checkSessionApi();
+        if (!response.data.success) {
+          toast.error(response.data.message);
+          localStorage.removeItem("token");
+          localStorage.removeItem("user");
+          navigate('/login'); // Redirect to login page
+        }
+      } catch (error) {
+        console.error('Session check failed:', error);
+      }
+    };
+
+    const interval = setInterval(checkSession, 5 * 60 * 1000); // Check session every 5 minutes
+    return () => clearInterval(interval); // Cleanup on component unmount
+  }, [navigate]);
+
+  const handleEmailChange = (e) => setEmail(e.target.value.trim());
+  const handlePasswordChange = (e) => setPassword(e.target.value);
+  const handleForgotPasswordEmailChange = (e) => setForgotPasswordEmail(e.target.value.trim());
+
+  const forgotPassword = async (e) => {
+    e.preventDefault();
+    if (!forgotPasswordEmail || !/\S+@\S+\.\S+/.test(forgotPasswordEmail)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
+    try {
+      const response = await forgotPasswordApi({ email: forgotPasswordEmail });
+      toast[response.data.success ? 'success' : 'error'](response.data.message);
+      if (response.data.success) setModalOpen(false); // Close modal on success
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Internal server error");
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    if (!email || !/\S+@\S+\.\S+/.test(email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+  
+    if (!password) {
+      toast.error("Please enter your password");
+      return;
+    }
+  
+    try {
+      const response = await loginApi({ email, password });
+  
+      if (response.data.success) {
+        if (response.data.redirectToChangePassword) {
+          navigate('changepassword/:id'); // Redirect to the change password page
+          toast.error(response.data.message); // Notify the user
+        } else {
+          toast.success(response.data.message);
+          localStorage.setItem("token", response.data.token);
+          localStorage.setItem("user", JSON.stringify(response.data.user));
+          navigate("/");
+        }
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      toast.error(error.response?.data?.message || "User not found");
+    }
+  };
+  
   return (
     <section style={{ backgroundColor: "#051923", color: "#6FFFE9" }}>
       <div className="d-flex justify-content-center">
         <div className="col-md-9 col-lg-6 col-xl-5 d-none d-md-block">
-          <img src={bg} alt="Sample image" style={{ width: "100%", height: "fit-content" }} />
+          <img src={bg} alt="Background" style={{ width: "100%", height: "auto" }} />
         </div>
         <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1 pt-5">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="d-flex justify-content-center flex-direction-row">
-              <img src={logo} alt="logo" />
+              <img src={logo} alt="Logo" />
             </div>
             <h2 className="text-center">Login</h2>
             <div className="form-outline mb-4">
-              <label className="form-label" htmlFor="form3Example3">
-                Email address
-              </label>
+              <label className="form-label" htmlFor="email">Email address</label>
               <input
-                onChange={handleEmail}
                 type="email"
-                id="form3Example3"
+                id="email"
                 className="form-control form-control-lg"
                 placeholder="Enter a valid email address"
+                value={email}
+                onChange={handleEmailChange}
+                required
               />
             </div>
             <div className="form-outline mb-3">
-              <label className="form-label" htmlFor="form3Example4">
-                Password
-              </label>
+              <label className="form-label" htmlFor="password">Password</label>
               <input
-                onChange={handlePassword}
                 type="password"
-                id="form3Example4"
+                id="password"
                 className="form-control form-control-lg"
                 placeholder="Enter password"
+                value={password}
+                onChange={handlePasswordChange}
+                required
               />
             </div>
             <div className="mt-3 d-flex justify-content-end w-100">
               <a
-                type="button"
+                href="#"
                 className="text-decoration-none text-muted"
-                data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setModalOpen(true);
+                }}
               >
                 Forgot Password?
               </a>
-              <div
-                className="modal fade"
-                id="staticBackdrop"
-                data-bs-backdrop="static"
-                data-bs-keyboard="false"
-                tabIndex="-1"
-                aria-labelledby="staticBackdropLabel"
-                aria-hidden="true"
-              >
-                <div className="modal-dialog">
-                  <div className="modal-content bg-dark text-white">
-                    <div className="modal-header text-center align-items-center">
-                      <h5 className="modal-title w-100" id="staticBackdropLabel">
-                        Change Password
-                      </h5>
-                      <button
-                        type="button"
-                        className="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                      ></button>
-                    </div>
-                    <div className="modal-body">
-                      <label>Enter your email</label>
-                      <input
-                        type="email"
-                        onChange={handleForgotPasswordEmail}
-                        className="form-control text-light"
-                        id="email"
-                        placeholder="Enter your email"
-                        style={{ color: "white" }}
-                      />
-                    </div>
-                    <div className="modal-footer">
-                      <button
-                        type="button"
-                        className="btn btn-secondary"
-                        onClick={forgotPassword}
-                      >
-                        Update Password
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
             <div className="text-center text-lg-start pt-2">
               <button
-                type="button"
+                type="submit"
                 className="btn btn-lg"
                 style={{ width: "100%", backgroundColor: "#6FFFE9", color: "white" }}
-                onClick={handleSubmit}
               >
                 Login
               </button>
               <p className="small fw-bold mt-2 pt-1 mb-0">
                 Don't have an account?{" "}
-                <a href="/register" className="link-danger">
-                  Register
-                </a>{" "}
+                <a href="/register" className="link-danger">Register</a>{" "}
                 |{" "}
                 <a
                   href="#"
                   className="link-danger"
-                  data-bs-toggle="modal"
-                  data-bs-target="#staticBackdrop"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setModalOpen(true);
+                  }}
                 >
                   Forgot Password?
                 </a>
               </p>
             </div>
           </form>
+          {modalOpen && (
+            <div
+              className="modal show"
+              style={{ display: "block" }}
+              role="dialog"
+              aria-labelledby="forgotPasswordModalLabel"
+              aria-hidden="false"
+            >
+              <div className="modal-dialog">
+                <div className="modal-content bg-dark text-white">
+                  <div className="modal-header">
+                    <h5 className="modal-title" id="forgotPasswordModalLabel">Reset Password</h5>
+                    <button
+                      type="button"
+                      className="btn-close"
+                      onClick={() => setModalOpen(false)}
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div className="modal-body">
+                    <form onSubmit={forgotPassword}>
+                      <label htmlFor="forgotPasswordEmail">Enter your email</label>
+                      <input
+                        type="email"
+                        id="forgotPasswordEmail"
+                        className="form-control"
+                        placeholder="Enter your email"
+                        value={forgotPasswordEmail}
+                        onChange={handleForgotPasswordEmailChange}
+                        required
+                      />
+                      <button
+                        type="submit"
+                        className="btn btn-secondary mt-2"
+                      >
+                        Update Password
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </section>
