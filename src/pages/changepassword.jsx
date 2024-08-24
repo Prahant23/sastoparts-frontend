@@ -67,7 +67,7 @@ const ChangePassword = () => {
   };
 
   return (
-    <div className="container-fluid h-100 d-flex align-items-center justify-content-center background-image">
+    <div className="container-fluid h-100 d-flex align-items-center justify-content-center background-image text-black">
       <div className="col-md-6 col-lg-4">
         <div className="text-center">
           <img 

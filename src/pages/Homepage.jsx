@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import "./Homepage.css"; // Ensure this is your custom CSS file
-import bike from "../assets/images/Container.png";
+import car from "../assets/images/car.png";
 import Typography from '@mui/material/Typography';
 import Rating from '@mui/material/Rating';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -28,7 +28,7 @@ function Homepage() {
 
     try {
       await axios.post(
-        "http://localhost:4000/api/cart/addtocart",
+        "https://localhost:4000/api/cart/addtocart",
         {
           productId: product._id,
           quantity: 1,
@@ -49,7 +49,7 @@ function Homepage() {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          "http://localhost:4000/api/product/getProducts"
+          "https://localhost:4000/api/product/getProducts"
         );
         const data = await response.json();
         setProducts(data.products);
@@ -81,7 +81,7 @@ function Homepage() {
   return (
     <div className="homepage-container">
       <div className="d-flex justify-content-center">
-        <img src={bike} alt="Bike" style={{ width: "80%" }} />
+        <img src={car} alt="car" style={{ width: "100%", height: "700px" }} />
       </div>
 
       <div className="text-black">

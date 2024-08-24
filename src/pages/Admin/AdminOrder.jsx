@@ -5,32 +5,51 @@ import axios from 'axios';
 const Admineditorder = () => {
     const [orders, setOrders] = useState([]);
     const userId = JSON.parse(localStorage.getItem("user"))?._id;
+    const token = localStorage.getItem("token"); // Retrieve the token from local storage
 
     useEffect(() => {
         // Fetch order details using user ID
         const fetchOrders = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/api/createorder/user/${userId}`);
+                const response = await axios.get(`https://localhost:4000/api/createorder/`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`, // Include the token in the headers
+                    },
+                });
                 if (response.data.success) {
                     setOrders(response.data.orders);
+                } else {
+                    console.error('Failed to fetch orders:', response.data.message);
                 }
             } catch (error) {
                 console.error('Error fetching orders:', error);
             }
         };
 
-        fetchOrders();
-    }, [userId]);
+        if (userId && token) {
+            fetchOrders();
+        }
+    }, [userId, token]);
 
     // Handler for approving an order
     const handleApprove = async (orderId) => {
         try {
-            const response = await axios.put(`http://localhost:4000/api/createorder/updateOrderStatus/${orderId}`, { status: 'Approved' });
+            const response = await axios.put(
+                `https://localhost:4000/api/createorder/updateOrderStatus/${orderId}`,
+                { status: 'Approved' },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`, // Include the token in the headers
+                    },
+                }
+            );
             if (response.data.success) {
                 // Update the orders state to reflect the change
                 setOrders(orders.map(order => 
                     order._id === orderId ? { ...order, orderStatus: 'Approved' } : order
                 ));
+            } else {
+                console.error('Failed to approve order:', response.data.message);
             }
         } catch (error) {
             console.error('Error approving order:', error);
@@ -40,10 +59,19 @@ const Admineditorder = () => {
     // Handler for canceling an order
     const handleCancel = async (orderId) => {
         try {
-            const response = await axios.delete(`http://localhost:4000/api/createorder/cancelOrder/${orderId}`);
+            const response = await axios.delete(
+                `https://localhost:4000/api/createorder/cancelOrder/${orderId}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`, // Include the token in the headers
+                    },
+                }
+            );
             if (response.data.success) {
                 // Update the orders state to reflect the change
                 setOrders(orders.filter(order => order._id !== orderId));
+            } else {
+                console.error('Failed to cancel order:', response.data.message);
             }
         } catch (error) {
             console.error('Error canceling order:', error);
@@ -51,7 +79,7 @@ const Admineditorder = () => {
     };
 
     return (
-        <div className="container mt-5">
+        <div className="container mt-5" style={{ backgroundColor: '#cbccd0', color: '#767986' }}>
             <h2 className="text-center mb-4">Orders History</h2>
             <div className="order-details mt-4">
                 <h5>Order Details:</h5>

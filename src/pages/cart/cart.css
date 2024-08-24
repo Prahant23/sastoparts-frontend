@@ -1,6 +1,6 @@
 /* Cart container */
 .cart-container {
-    background-color: #051923;
+    background-color: #dde2e5;
     color: #6fffe9;
     padding: 50px;
   }
@@ -61,7 +61,7 @@
   }
   
   .cart-summary .btn-primary:hover {
-    background-color: #48a9a6;
+    background-color: #020202;
     border-color: #48a9a6;
   }
   

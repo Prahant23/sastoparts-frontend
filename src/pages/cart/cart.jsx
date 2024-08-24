@@ -16,7 +16,7 @@ const Cart = () => {
 
   const getCartItems = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/api/cart", {
+      const response = await axios.get("https://localhost:4000/api/cart", {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -83,10 +83,10 @@ const Cart = () => {
   };
 
   return (
-    <div className="py-5" style={{ backgroundColor: "#051923", color: "#6FFFE9" }}>
+    <div className="py-5" style={{ backgroundColor: "#FFFFFF", color: "#FFFFFF" }}>
       <div className="">
         <div className="row mx-2">
-          <h2 className="mb-4">Your Shopping Cart</h2>
+          <h2 className="mb-4 text-black">Your Shopping Cart</h2>
           <div className="col-md-8">
             {cartItems.map((cart, index) => (
               <div key={index} className="card mb-3">

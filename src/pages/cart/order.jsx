@@ -69,8 +69,8 @@ const ReviewPage = () => {
     return (
         <div className="container-fluid mt-5">
             <div className="row">
-                <div className="col-12 col-md-7" style={{ backgroundColor: '#1E2A3A', color: '#6FFFE9' }}>
-                    <div className="card p-3" style={{ backgroundColor: '#1E2A3A', color: '#6FFFE9' }}>
+                <div className="col-12 col-md-7" style={{ backgroundColor: '#cbccd0', color: '#cbccd0' }}>
+                    <div className="card p-3" style={{ backgroundColor: '#cbccd0', color: '#cbccd0' }}>
                         <form>
                             <div className="mb-3">
                                 <label htmlFor="firstName" className="form-label">First Name</label>
@@ -160,11 +160,11 @@ const ReviewPage = () => {
                         </form>
                     </div>
                 </div>
-                <div className="col-12 col-md-5 mb-4" style={{ backgroundColor: '#1E2A3A', color: '#6FFFE9' }}>
-                    <div className="card p-3" style={{ backgroundColor: '#1E2A3A', color: '#6FFFE9' }}>
+                <div className="col-12 col-md-5 mb-4 text-black" style={{ backgroundColor: '#cbccd0', color: '#767986' }}>
+                    <div className="card p-3" style={{ backgroundColor: '#cbccd0', color: '#FFFFFF' }}>
                         <div className="cart-items">
                             {cart.length > 0 ? cart.map((item) => (
-                                <div key={item._id} className="cart-item mb-3 d-flex align-items-center" style={{ color: '#6FFFE9' }}>
+                                <div key={item._id} className="cart-item mb-3 d-flex align-items-center" style={{ color: '#FFFFFF' }}>
                                     <img src={item?.productImg} alt={item?.productName || 'Product'} className="cart-item-image" style={{ width: '225px', height: '225px' }} />
                                     <div className="cart-item-details ms-3">
                                         <div className="d-flex flex-column">

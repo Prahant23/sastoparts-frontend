@@ -1,5 +1,5 @@
 .profilepage {
-  background-color: #0e192a;
+  background-color: #d2d5da;
   width: 100%;
   height: fit-content;
 }
@@ -10,7 +10,7 @@
 }
 
 .profile-card {
-  background-color: #1e2a3a;
+  background-color: #babcbe;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -21,7 +21,7 @@
   text-align: center;
   font-weight: bold;
   font-size: 24px;
-  color: #08a6f5;
+  color: #030507;
   margin-bottom: 20px;
 }
 
@@ -57,7 +57,7 @@
 .user-info h2 {
   margin: 10px 0 5px 0;
   font-size: 22px;
-  color: #1c9bc9;
+  color: #030506;
 }
 
 .user-info p {
@@ -122,15 +122,15 @@
 .profile-form label {
   margin-bottom: 5px;
   font-size: 16px;
-  color: #1c9bc9;
+  color: #040505;
 }
 
 .profile-form input {
   padding: 5px;
   border: 1px solid #f7eaea;
   border-radius: 5px;
-  background-color: #0e192a;
-  color: #f5f5f5;
+  background-color: #fafafb;
+  color: #040404;
   font-size: 19px;
 }
 

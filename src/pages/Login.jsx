@@ -4,6 +4,7 @@ import { forgotPasswordApi, loginApi, checkSessionApi } from "../apis/Api"; // I
 import { useNavigate } from "react-router-dom";
 import bg from "../assets/images/Rectangle 1587.png";
 import logo from "../assets/images/logo.png";
+import car from "../assets/images/Untitled design (2).png";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -94,12 +95,19 @@ const Login = () => {
   };
   
   return (
-    <section style={{ backgroundColor: "#051923", color: "#6FFFE9" }}>
-      <div className="d-flex justify-content-center">
+    <section style={{ backgroundColor: "#cbccd0", color: "#cbccd0",  }}>
+      <div className="d-flex justify-content-start">
         <div className="col-md-9 col-lg-6 col-xl-5 d-none d-md-block">
-          <img src={bg} alt="Background" style={{ width: "100%", height: "auto" }} />
+          <img src={car} alt="Background"  style={{ 
+          width: "150%", 
+          height: "700px", 
+          objectFit: "cover", // Ensure the image covers the div properly
+          alignSelf: "flex-start", // Align the image to the top of the div
+          paddingTop:"120px"
+          
+        }}  />
         </div>
-        <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1 pt-5">
+        <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-2 pt-4">
           <form onSubmit={handleSubmit}>
             <div className="d-flex justify-content-center flex-direction-row">
               <img src={logo} alt="Logo" />
@@ -129,10 +137,9 @@ const Login = () => {
                 required
               />
             </div>
-            <div className="mt-3 d-flex justify-content-end w-100">
+            <div className="mt-3 d-flex justify-content-end w-100 text-black">
               <a
-                href="#"
-                className="text-decoration-none text-muted"
+                className="text-decoration-none text-muted text-black"
                 onClick={(e) => {
                   e.preventDefault();
                   setModalOpen(true);
@@ -149,7 +156,7 @@ const Login = () => {
               >
                 Login
               </button>
-              <p className="small fw-bold mt-2 pt-1 mb-0">
+              <p className="small fw-bold mt-2 pt-1 mb-0 text-black">
                 Don't have an account?{" "}
                 <a href="/register" className="link-danger">Register</a>{" "}
                 |{" "}

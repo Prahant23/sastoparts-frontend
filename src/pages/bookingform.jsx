@@ -94,10 +94,10 @@ const BookingForm = ({ userId }) => {
   };
 
   return (
-    <div style={{ backgroundColor: "#051923", color: "#6FFFE9", padding: "20px" }}>
+    <div style={{ backgroundColor: "#d9dee0", color: "#d9dee0", padding: "20px" }}>
       <ToastContainer />
-      <form onSubmit={handleSubmit} className="container" style={{ backgroundColor: "#051923", color: "#6FFFE9" }}>
-        <p style={{ color: "#C4C4C4" }}>
+      <form onSubmit={handleSubmit} className="container" style={{ backgroundColor: "#d9dee0", color: "#051923" }}>
+        <p style={{ color: "#051923" }}>
           At Sastoaparts, we're dedicated to providing top-notch automotive care,
           <br />
           where your satisfaction drives every repair and service we offer.
@@ -170,13 +170,13 @@ const BookingForm = ({ userId }) => {
             </div>
           </div>
         </div>
-        <button type="submit" className="btn mt-3" style={{ backgroundColor: "#6FFFE9" }}>
+        <button type="submit" className="btn mt-3" style={{ backgroundColor: "#6fff76" }}>
           Book Garage
         </button>
       </form>
 
       {/* Display user's bookings */}
-      <div className="mt-4">
+      <div className="mt-4 text-black">
         <h2>Your Bookings</h2>
         <ul>
           {userBookings.map((booking) => (

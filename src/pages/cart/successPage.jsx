@@ -1,30 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { Table } from 'react-bootstrap';
 import axios from 'axios';
+import Api from '../../apis/Api';
 
 const SuccessPage = () => {
     const [orders, setOrders] = useState([]);
-    const [shippingInfo, setShippingInfo] = useState({});
-    const [totalPayment, setTotalPayment] = useState(0);
-
     const userId = JSON.parse(localStorage.getItem("user"))?._id;
+    const token = localStorage.getItem("token"); // Retrieve the token from local storage
 
     useEffect(() => {
         // Fetch order details using user ID
         const fetchOrders = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/api/createorder/user/${userId}`);
+                const response = await axios.get(`https://localhost:4000/api/createOrder/user/${userId}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`, // Include the token in the headers
+                    },
+                });
                 if (response.data.success) {
                     setOrders(response.data.orders);
-                    // Assuming shippingInfo and totalPayment are constant, set these accordingly if needed
+                } else {
+                    console.error('Failed to fetch orders:', response.data.message);
                 }
             } catch (error) {
                 console.error('Error fetching orders:', error);
             }
         };
 
-        fetchOrders();
-    }, [userId]);
+        if (userId && token) {
+            fetchOrders();
+        }
+    }, [userId, token]);
 
     return (
         <div className="container mt-5">
@@ -58,31 +64,36 @@ const SuccessPage = () => {
                         )}
                     </tbody>
                 </Table>
-                <h5>Shipping Information:</h5>
-                <Table striped bordered hover>
-                    <thead>
-                        <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Address</th>
-                            <th>Contact Number</th>
-                            <th>City</th>
-                            <th>ZIP Code</th>
-                            <th>State</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>{shippingInfo?.firstName || 'N/A'}</td>
-                            <td>{shippingInfo?.lastName || 'N/A'}</td>
-                            <td>{shippingInfo?.address || 'N/A'}</td>
-                            <td>{shippingInfo?.contactNumber || 'N/A'}</td>
-                            <td>{shippingInfo?.city || 'N/A'}</td>
-                            <td>{shippingInfo?.zip || 'N/A'}</td>
-                            <td>{shippingInfo?.state || 'N/A'}</td>
-                        </tr>
-                    </tbody>
-                </Table>
+
+                {orders.length > 0 && orders[0].shippingID && (
+                    <>
+                        <h5>Shipping Information:</h5>
+                        <Table striped bordered hover>
+                            <thead>
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Address</th>
+                                    <th>Contact Number</th>
+                                    <th>City</th>
+                                    <th>ZIP Code</th>
+                                    <th>State</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{orders[0].shippingID.firstName || 'N/A'}</td>
+                                    <td>{orders[0].shippingID.lastName || 'N/A'}</td>
+                                    <td>{orders[0].shippingID.address || 'N/A'}</td>
+                                    <td>{orders[0].shippingID.contactNumber || 'N/A'}</td>
+                                    <td>{orders[0].shippingID.city || 'N/A'}</td>
+                                    <td>{orders[0].shippingID.zip || 'N/A'}</td>
+                                    <td>{orders[0].shippingID.state || 'N/A'}</td>
+                                </tr>
+                            </tbody>
+                        </Table>
+                    </>
+                )}
             </div>
         </div>
     );

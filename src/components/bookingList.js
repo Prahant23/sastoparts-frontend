@@ -57,7 +57,7 @@ const BookingList = () => {
   };
 
   return (
-    <div className="booking-list-container">
+    <div className="booking-list-container text-black">
       <h2>Bookings List</h2>
       <table className="booking-table">
         <thead>

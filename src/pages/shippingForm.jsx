@@ -112,7 +112,7 @@ const ShippingForm = ({ userId, shippingInfo: initialShippingInfo, onSave }) => 
   };
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-5" style={{ color: "#FFFFFF" }}>
       <ToastContainer />
       <h2>Shipping Information</h2>
       <form onSubmit={handleSubmit}>

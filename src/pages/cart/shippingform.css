@@ -2,8 +2,8 @@
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #051923;
-    color: #6FFFE9;
+    background-color: #cbccd0;
+    color: #0b0e0d;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
@@ -11,12 +11,12 @@
   h2 {
     font-size: 30px;
     margin-bottom: 20px;
-    color: #6FFFE9;
+    color: #060808;
   }
   
   .form-label {
     font-weight: bold;
-    color: #6FFFE9;
+    color: #020303;
   }
   
   .form-control {
@@ -37,8 +37,8 @@
   }
   
   .btn-primary {
-    background-color: #6FFFE9;
-    border-color: #6FFFE9;
+    background-color: #2dd671;
+    border-color: #060707;
     color: #051923;
     padding: 10px 20px;
     border-radius: 5px;

@@ -89,11 +89,11 @@ const AdminDashboard = () => {
   return (
     <>
       <div className="m-4">
-        <div className="d-flex justify-content-between align-items-center mb-4">
+        <div className="d-flex justify-content-between align-items-center mb-4 text-black">
           <h1>Admin Dashboard</h1>
           <button
             type="button"
-            className="btn btn-primary"
+            className="btn btn-primary "
             data-bs-toggle="modal"
             data-bs-target="#exampleModal"
           >

@@ -1,7 +1,7 @@
 /* BookingList.css */
 .booking-list-container {
-    background-color: #051923;
-    color: #6FFFE9;
+    background-color: #d9dddf;
+    color: #080d0c;
     padding: 20px;
     border-radius: 10px;
     width: 90%;
@@ -11,25 +11,25 @@
   }
   
   .booking-list-container h2 {
-    color: #6FFFE9;
+    color: #050808;
     margin-bottom: 20px;
   }
   
   .booking-table {
     width: 100%;
     border-collapse: collapse;
-    background-color: #00334e;
+    background-color: #f3f6f8;
   }
   
   .booking-table thead {
-    background-color: #00717d;
+    background-color: #e0d5d5;
   }
   
   .booking-table th,
   .booking-table td {
     padding: 10px;
     border: 1px solid #004d5a;
-    color: #6FFFE9;
+    color: #000706;
   }
   
   .booking-table th {

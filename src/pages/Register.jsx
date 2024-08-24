@@ -6,6 +6,7 @@ import logo from "../assets/images/logo.png";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import carr from "../assets/images/Untitled design (2).png";
 
 const Register = () => {
   const [firstName, setFirstName] = useState("");
@@ -115,12 +116,12 @@ const Register = () => {
   };
 
   return (
-    <section style={{ backgroundColor: "#051923", color: "#6FFFE9" }}>
-      <div className="d-flex justify-content-center">
-        <div className="col-md-9 col-lg-6 col-xl-5 d-none d-md-block">
-          <img src={bg} alt="Background" style={{ width: "100%", height: "fit-content" }} />
+    <section style={{ backgroundColor: "#cbccd0", color: "cbccd0" }}>
+      <div className="d-flex justify-content-start">
+        <div className="col-md-9 col-lg-6 col-xl-3 d-none d-md-block">
+          <img src={carr} alt="Background" style={{ width: "300%", height: "100%", paddingTop: "200px" }} />
         </div>
-        <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1 pt-5">
+        <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-4 pt-4">
           <form onSubmit={handleSubmit}>
             <div className="d-flex justify-content-center flex-direction-row">
               <img src={logo} alt="Logo" />
@@ -258,13 +259,13 @@ const Register = () => {
                 className="btn btn-lg"
                 style={{
                   width: "100%",
-                  backgroundColor: "#6FFFE9",
+                  backgroundColor: "#08b822",
                   color: "white",
                 }}
               >
                 Register
               </button>
-              <p className="small fw-bold mt-2 pt-1 mb-0">
+              <p className="small fw-bold mt-2 pt-1 mb-0 text-black">
                 Already have an account?{" "}
                 <a href="/login" className="link-danger">
                   Login

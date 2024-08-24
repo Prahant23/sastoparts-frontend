@@ -3,8 +3,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { getLoggedInUserDetail } from "../apis/Api";
 import "./Navbar.css";
 import logo from "../assets/images/logo.png";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faSignOutAlt, faShoppingCart, faCalendarAlt, faList, faKey } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHistory } from "@fortawesome/free-solid-svg-icons";
+import { faReceipt } from '@fortawesome/free-solid-svg-icons';
+import {
+  faEdit,
+  faSignOutAlt,
+  faShoppingCart,
+  faCalendarAlt,
+  faList,
+  faKey,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = () => {
   // Retrieve user from localStorage and handle potential JSON parsing errors
@@ -21,7 +30,7 @@ const Navbar = () => {
 
   useEffect(() => {
     // Ensure user._id exists and is valid before making the API call
-    if (user._id && typeof user._id === 'string') {
+    if (user._id && typeof user._id === "string") {
       getLoggedInUserDetail(user._id)
         .then((res) => {
           if (res.data.success) {
@@ -61,12 +70,20 @@ const Navbar = () => {
     }
   };
 
-  const placeholderAvatar = "https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI=";
+  const placeholderAvatar =
+    "https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI=";
 
   return (
-    <nav className="navbar navbar-expand-lg" style={{ backgroundColor: "#dfe1e6" }}>
+    <nav
+      className="navbar navbar-expand-lg"
+      style={{ backgroundColor: "#dfe1e6" }}
+    >
       <div className="container-fluid mx-2">
-        <Link className="navbar-brand text-danger fw-bold" to="/" onClick={handleDash}>
+        <Link
+          className="navbar-brand text-danger fw-bold"
+          to="/"
+          onClick={handleDash}
+        >
           <img src={logo} alt="logo" style={{ height: "50px" }} />
         </Link>
         <button
@@ -85,20 +102,46 @@ const Navbar = () => {
             {user.isAdmin && (
               <>
                 <li className="nav-item">
-                  <Link to="/admin" className="nav-link" onClick={editProducts} style={{ color: "#FFFFFF" }}>
-                    <FontAwesomeIcon icon={faEdit} className="me-1" style={{ fontSize: "1.2rem", color: "#5BC0BE" }} />
+                  <Link
+                    to="/admin"
+                    className="nav-link"
+                    onClick={editProducts}
+                    style={{ color: "#FFFFFF" }}
+                  >
+                    <FontAwesomeIcon
+                      icon={faEdit}
+                      className="me-1"
+                      style={{ fontSize: "1.2rem", color: "#5BC0BE" }}
+                    />
                     Products
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/manageorder" className="nav-link" onClick={editOrders} style={{ color: "#FFFFFF" }}>
-                    <FontAwesomeIcon icon={faEdit} className="me-1" style={{ fontSize: "1.2rem", color: "#5BC0BE" }} />
+                  <Link
+                    to="/manageorder"
+                    className="nav-link"
+                    onClick={editOrders}
+                    style={{ color: "#FFFFFF" }}
+                  >
+                    <FontAwesomeIcon
+                      icon={faEdit}
+                      className="me-1"
+                      style={{ fontSize: "1.2rem", color: "#5BC0BE" }}
+                    />
                     Orders
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/bookings" className="nav-link" style={{ color: "#FFFFFF" }}>
-                    <FontAwesomeIcon icon={faList} className="me-1" style={{ fontSize: "1.2rem", color: "#5BC0BE" }} />
+                  <Link
+                    to="/bookings"
+                    className="nav-link"
+                    style={{ color: "#FFFFFF" }}
+                  >
+                    <FontAwesomeIcon
+                      icon={faReceipt}
+                      className="me-1"
+                      style={{ fontSize: "1.2rem", color: "#5BC0BE" }}
+                    />
                     Bookings
                   </Link>
                 </li>
@@ -107,61 +150,123 @@ const Navbar = () => {
           </ul>
           <ul className="navbar-nav d-flex align-items-center">
             <li className="nav-item">
-              <Link to="/book-garage" className="btn nav-link" style={{ color: "#5BC0BE" }}>
-                <FontAwesomeIcon icon={faCalendarAlt} className="me-1" style={{ fontSize: "1.2rem" }} />
+              <Link
+                to="/book-garage"
+                className="btn nav-link"
+                style={{ color: "#5BC0BE" }}
+              >
+                <FontAwesomeIcon
+                  icon={faCalendarAlt}
+                  className="me-1"
+                  style={{ fontSize: "1.2rem" }}
+                />
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/cartpage" className="nav-link" style={{ color: "#FFFFFF" }}>
-                <FontAwesomeIcon icon={faShoppingCart} className="me-1" style={{ fontSize: "1.2rem", color: "#5BC0BE" }} />
+              <Link
+                to="/audit-trails"
+                className="btn nav-link"
+                style={{ color: "#5BC0BE" }}
+              >
+                <FontAwesomeIcon
+                  icon={faHistory}
+                  className="me-1"
+                  style={{ fontSize: "1.2rem" }}
+                />
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link
+                to="/success"
+                className="btn nav-link"
+                style={{ color: "#5BC0BE" }}
+              >
+                <FontAwesomeIcon
+                  icon={faReceipt}
+                  className="me-1"
+                  style={{ fontSize: "1.2rem" }}
+                />
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link
+                to="/cartpage"
+                className="nav-link"
+                style={{ color: "#FFFFFF" }}
+              >
+                <FontAwesomeIcon
+                  icon={faShoppingCart}
+                  className="me-1"
+                  style={{ fontSize: "1.2rem", color: "#5BC0BE" }}
+                />
                 <span className="badge rounded-pill badge-notification"></span>
               </Link>
             </li>
             {user ? (
               <>
                 <li className="nav-item">
-                  <Link to={`/edit-profile/${user._id}`} className="nav-link d-flex align-items-center" style={{ color: "#FFFFFF" }}>
-                    <img src={user.avatar || placeholderAvatar} style={{ height: "30px", width: "30px", borderRadius: "50%" }} alt="avatar" />
+                  <Link
+                    to={`/edit-profile/${user._id}`}
+                    className="nav-link d-flex align-items-center"
+                    style={{ color: "#FFFFFF" }}
+                  >
+                    <img
+                      src={user.avatar || placeholderAvatar}
+                      style={{
+                        height: "30px",
+                        width: "30px",
+                        borderRadius: "50%",
+                      }}
+                      alt="avatar"
+                    />
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <button 
-                    className="btn nav-link" 
-                    onClick={changePassword} 
-                    style={{ color: "#5BC0BE" }} 
+                  <button
+                    className="btn nav-link"
+                    onClick={changePassword}
+                    style={{ color: "#5BC0BE" }}
                     type="button"
                   >
-                    <FontAwesomeIcon icon={faKey} className="me-1" style={{ fontSize: "1.2rem" }} />
+                    <FontAwesomeIcon
+                      icon={faKey}
+                      className="me-1"
+                      style={{ fontSize: "1.2rem" }}
+                    />
                   </button>
                 </li>
                 <li className="nav-item">
-                  <button 
-                    className="btn nav-link" 
-                    onClick={logout} 
-                    style={{ color: "#5BC0BE" }} 
+                  <button
+                    className="btn nav-link"
+                    onClick={logout}
+                    style={{ color: "#5BC0BE" }}
                     type="button"
                   >
-                    <FontAwesomeIcon icon={faSignOutAlt} className="me-1" style={{ fontSize: "1.2rem" }} />
+                    <FontAwesomeIcon
+                      icon={faSignOutAlt}
+                      className="me-1"
+                      style={{ fontSize: "1.2rem" }}
+                    />
                   </button>
                 </li>
               </>
             ) : (
               <>
                 <li className="nav-item">
-                  <button 
-                    onClick={navigateToLogin} 
-                    className="btn nav-link" 
-                    style={{ backgroundColor: "#5BC0BE", color: "white" }} 
+                  <button
+                    onClick={navigateToLogin}
+                    className="btn nav-link"
+                    style={{ backgroundColor: "#5BC0BE", color: "white" }}
                     type="button"
                   >
                     Login
                   </button>
                 </li>
                 <li className="nav-item">
-                  <button 
-                    onClick={navigateToRegister} 
-                    className="btn nav-link" 
-                    style={{ backgroundColor: "#5BC0BE", color: "white" }} 
+                  <button
+                    onClick={navigateToRegister}
+                    className="btn nav-link"
+                    style={{ backgroundColor: "#5BC0BE", color: "white" }}
                     type="button"
                   >
                     Register

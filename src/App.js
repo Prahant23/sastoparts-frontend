@@ -24,6 +24,7 @@ import ShippingForm from "./pages/shippingForm";
 import SuccessPage from "./pages/cart/successPage";
 import AdminOrdersPage from "./pages/Admin/AdminOrder";
 import VerifyEmail from "./pages/verifyemail";
+import AuditTrail from "./pages/auditTrail";
 
 
 function App() {
@@ -48,6 +49,8 @@ function App() {
         <Route path="/success" element={<SuccessPage/>} />
         <Route path="/manageorder" element={<AdminOrdersPage/>} />
         <Route path="/verify-email/:token" element={<VerifyEmail />} />
+        <Route path="/audit-trails" element={<AuditTrail/>} />
+        {/* <Route path="/audit-trails/user/:userId" element={<UserAuditTrail />} /> */}
 
         
         {/* Protect routes with User authentication */}
